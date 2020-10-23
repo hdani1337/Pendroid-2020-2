@@ -1,4 +1,4 @@
-#Pattogtatós játék
+# Pattogtatós játék
 
 Készíts egy egyszerű játék programot, amelynek témája: egy tetszőleges objektum pattogtatása.
 
