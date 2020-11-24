@@ -1,5 +1,6 @@
 package hu.cehessteg.ballgame.Screen;
 
+import hu.cehessteg.ballgame.Stage.BallStage;
 import hu.cehessteg.ballgame.Stage.GameOverStage;
 import hu.cehessteg.ballgame.Stage.HudStage;
 import hu.cehessteg.ballgame.Stage.PauseStage;
@@ -20,16 +21,16 @@ public class GameScreen extends MyScreen {
         super(game);
     }
 
-    //public CardStage cardStage;
+    public BallStage ballStage;
 
     @Override
     protected void afterAssetsLoaded() {
-        /*addStage(new TableStage(game),0,false);
-        cardStage = new CardStage(game);
-        HudStage.stage = cardStage;
-        addStage(cardStage,1,true)*/
-        addStage(new HudStage(game),2, true);
-        addStage(new PauseStage(game),3, true);
+        //addStage(new TableStage(game),0,false);
+        ballStage = new BallStage(game);
+        //HudStage.stage = cardStage;
+        addStage(ballStage,1,true);
+        //addStage(new HudStage(game),2, true);
+        //addStage(new PauseStage(game),3, true);
         addStage(new GameOverStage(game),4, true);
     }
 

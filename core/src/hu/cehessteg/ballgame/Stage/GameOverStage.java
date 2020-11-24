@@ -41,7 +41,7 @@ public class GameOverStage extends PrettyStage {
     //region Absztrakt metódusok
     @Override
     public void assignment() {
-        info = new TextBox(game, "Gratulálok, nyertél!",2f);
+        info = new TextBox(game, "Vége a játéknak!",2f);
         pontok = new TextBox(game, "Elért pontszámod\n-NULL-");
         again = new TextBox(game, "Új játék",1.5f);
         menu = new TextBox(game, "Menü",1.5f);
@@ -142,10 +142,10 @@ public class GameOverStage extends PrettyStage {
          * **/
         if(getScreen() != null){
             if(getScreen() instanceof GameScreen){
-                /*if(!CardStage.isAct && CardStage.isGameOver){
+                if(BallStage.gameOver){
                     if(gameMusic != null) gameMusic.stop();
                     makeStage();
-                }*/
+                }
             }
         }
     }

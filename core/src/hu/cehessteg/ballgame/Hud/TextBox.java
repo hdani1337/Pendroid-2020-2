@@ -72,9 +72,11 @@ public class TextBox extends MyGroup implements IPrettyStage {
 
     @Override
     public void setPositions() {
-        textLabel.setAlignment(Align.center);
-        textBackground.setPosition(0,0);
-        textLabel.setPosition(textBackground.getX()+textBackground.getWidth()/2-textLabel.getWidth()/2,textBackground.getY()+textBackground.getHeight()/2-textLabel.getHeight()/2);
+        if(textBackground != null && textLabel != null) {
+            textLabel.setAlignment(Align.center);
+            textBackground.setPosition(0, 0);
+            textLabel.setPosition(textBackground.getX() + textBackground.getWidth() / 2 - textLabel.getWidth() / 2, textBackground.getY() + textBackground.getHeight() / 2 - textLabel.getHeight() / 2);
+        }
     }
 
     @Override
@@ -99,7 +101,7 @@ public class TextBox extends MyGroup implements IPrettyStage {
      * **/
     @Override
     public float getWidth() {
-        return textBackground.getWidth();
+        return (textBackground!=null)?textBackground.getWidth():0;
     }
 
     /**
@@ -107,7 +109,7 @@ public class TextBox extends MyGroup implements IPrettyStage {
      * **/
     @Override
     public float getHeight() {
-        return textBackground.getHeight();
+        return (textBackground!=null)?textBackground.getHeight():0;
     }
 
     /**
@@ -115,7 +117,7 @@ public class TextBox extends MyGroup implements IPrettyStage {
      * **/
     @Override
     public void setWidth(float width) {
-        textBackground.setWidth(width);
+        if(textBackground != null) textBackground.setWidth(width);
         setPositions();
     }
 
