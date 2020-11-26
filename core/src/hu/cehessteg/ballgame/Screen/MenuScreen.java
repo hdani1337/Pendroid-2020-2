@@ -13,13 +13,16 @@ import hu.csanyzeg.master.MyBaseClasses.Timers.PermanentTimer;
 import hu.csanyzeg.master.MyBaseClasses.Timers.PermanentTimerListener;
 
 import static hu.cehessteg.ballgame.BallGame.preferences;
-import static hu.cehessteg.ballgame.BallGame.weatherCalculation;
+import static hu.cehessteg.ballgame.BallGame.weatherAct;
+import static hu.cehessteg.ballgame.BallGame.weatherBackground;
+
 
 public class MenuScreen extends MyScreen {
     public static AssetList assetList = new AssetList();
     static {
         assetList.collectAssetDescriptor(MenuStage.class,assetList);
         assetList.collectAssetDescriptor(MenuBackgroundStage.class,assetList);
+        assetList.collectAssetDescriptor(WeatherBackground.class, assetList);
     }
 
     public MenuScreen(MyGame game) {
@@ -28,23 +31,9 @@ public class MenuScreen extends MyScreen {
 
     @Override
     protected void afterAssetsLoaded() {
-        weatherBackground = new WeatherBackground(new ResponseViewport(800),game);
         addStage(weatherBackground,0,false);
+        addTimer(weatherAct);
         addStage(new MenuStage(game),1,true);
-        addTimer(new PermanentTimer(new PermanentTimerListener(){
-            @Override
-            public void onTick(PermanentTimer sender, float correction) {
-                super.onTick(sender, correction);
-                weatherCalculation.step(correction*100);
-                weatherBackground.setTime(weatherCalculation.getTime());
-                weatherBackground.setRain(weatherCalculation.getRain());
-                weatherBackground.act(correction);
-                if(weatherCalculation.getM()==0){
-                    preferences.putFloat("time",weatherCalculation.getTime());
-                    preferences.flush();
-                }
-            }
-        }));
     }
 
     @Override
@@ -56,6 +45,4 @@ public class MenuScreen extends MyScreen {
     public void init() {
 
     }
-
-    WeatherBackground weatherBackground;
 }

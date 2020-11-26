@@ -34,8 +34,6 @@ public class OptionsStage extends PrettyStage {
     public static int gamemode = preferences.getInteger("gamemode");
     public static int size = preferences.getInteger("size");
 
-    private OneSpriteStaticActor MenuBackground;
-
     private Logo optionsLogo;
 
     private OneSpriteStaticActor backButton;
@@ -55,7 +53,6 @@ public class OptionsStage extends PrettyStage {
         if(!muted && SoundManager.menuMusic != null)
             SoundManager.menuMusic.play();
         setBack = false;
-        MenuBackground = new OneSpriteStaticActor(game,MENU_BG_TEXTURE);
         backButton = new OneSpriteStaticActor(game,BACKBUTTON_TEXTURE);
         gameModeButton = new OptionSwitch(game, OptionSwitchType.GAMEMODE);
         difficultyButton = new OptionSwitch(game, OptionSwitchType.DIFFICULTY);
@@ -65,15 +62,12 @@ public class OptionsStage extends PrettyStage {
 
     @Override
     public void setSizes() {
-        if(getViewport().getWorldWidth() > MenuBackground.getWidth()) MenuBackground.setWidth(getViewport().getWorldWidth());
-        if(getViewport().getWorldHeight() > MenuBackground.getHeight()) MenuBackground.setHeight(getViewport().getWorldHeight());
         backButton.setSize(160,160);
     }
 
     @Override
     public void setPositions() {
         backButton.setRotation(180);
-        if(getViewport().getWorldWidth() < MenuBackground.getWidth()) MenuBackground.setX((getViewport().getWorldWidth()-MenuBackground.getWidth())/2);
         backButton.setPosition(getViewport().getWorldWidth() - backButton.getWidth()-16,16);
         optionsLogo.setPosition(getViewport().getWorldWidth()/2 - optionsLogo.getWidth()/2, getViewport().getWorldHeight() - optionsLogo.getHeight()*1.15f);
         gameModeButton.setPosition(getViewport().getWorldWidth()/2-gameModeButton.getWidth()/2,getViewport().getWorldHeight()-570);
@@ -104,7 +98,6 @@ public class OptionsStage extends PrettyStage {
 
     @Override
     public void addActors() {
-        addActor(MenuBackground);
         addActor(optionsLogo);
         addActor(difficultyButton);
         addActor(backButton);
@@ -120,7 +113,6 @@ public class OptionsStage extends PrettyStage {
         super.act(delta);
         if(!setBack) fadeIn();
         else fadeOut();
-        setBackgroundAlpha();
     }
 
     /**
@@ -139,8 +131,6 @@ public class OptionsStage extends PrettyStage {
         if (alpha > 0.05) {
             setAlpha();
             alpha -= 0.05;
-            if(bgAlpha<0.95) bgAlpha+= 0.05;
-            MenuBackground.setAlpha(bgAlpha);
         } else {
             //Ha már nem látszanak akkor megyünk vissza a menübe
             alpha = 0;
@@ -153,16 +143,6 @@ public class OptionsStage extends PrettyStage {
                     setBack = false;
                 }
             }));
-        }
-    }
-
-    /**
-     * Háttér átlátszóságát állítja be
-     * **/
-    private void setBackgroundAlpha(){
-        if(bgAlpha>0.65 && !setBack){
-            bgAlpha-=0.025;
-            MenuBackground.setAlpha(bgAlpha);
         }
     }
 

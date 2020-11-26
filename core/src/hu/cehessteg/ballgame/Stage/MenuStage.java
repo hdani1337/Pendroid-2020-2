@@ -176,11 +176,9 @@ public class MenuStage extends PrettySimpleStage {
     private void animation(OneSpriteStaticActor sender){
         sender.setOrigintoCenter();
         ((SimpleWorldHelper)sender.getActorWorldHelper()).getBody().sizeToFixTime(sender.getWidth()*1.5f,sender.getHeight()*1.5f,0.5f, PositionRule.Center);
-        ((SimpleWorldHelper)sender.getActorWorldHelper()).getBody().rotateToFixTime(360,0.5f, Direction.ClockWise);
         ((SimpleWorldHelper)sender.getActorWorldHelper()).getBody().colorToFixTime(0.6f,1,1,1,0);
         for (OneSpriteStaticActor a : menuElements)
             if(a != sender) {
-                ((SimpleWorldHelper) a.getActorWorldHelper()).getBody().sizeToFixTime(0, 0, 0.5f, PositionRule.Center);
                 ((SimpleWorldHelper) a.getActorWorldHelper()).getBody().colorToFixTime(0.5f,1,1,1,0);
             }
     }

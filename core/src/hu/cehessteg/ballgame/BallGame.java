@@ -7,9 +7,14 @@ import com.badlogic.gdx.Preferences;
 import hu.cehessteg.ballgame.Screen.GameScreen;
 import hu.cehessteg.ballgame.Screen.IntroScreen;
 import hu.cehessteg.ballgame.Screen.MenuScreen;
+import hu.cehessteg.ballgame.Screen.OptionsScreen;
 import hu.cehessteg.ballgame.Stage.LoadingStage;
+import hu.cehessteg.ballgame.Stage.WeatherBackground;
 import hu.cehessteg.ballgame.Stage.WeatherCalculation;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
+import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
+import hu.csanyzeg.master.MyBaseClasses.Timers.PermanentTimer;
+import hu.csanyzeg.master.MyBaseClasses.Timers.PermanentTimerListener;
 
 public class BallGame extends MyGame {
 	public static WeatherCalculation weatherCalculation;
@@ -28,7 +33,7 @@ public class BallGame extends MyGame {
 	public void create() {
 		super.create();
 		setLoadingStage(new LoadingStage(this));
-		setScreen(new MenuScreen(this));
+		setScreen(new IntroScreen(this));
 		weatherCalculation = new WeatherCalculation(0);
 		try {
 			preferences = Gdx.app.getPreferences("frameworkSave");
@@ -40,6 +45,29 @@ public class BallGame extends MyGame {
 		}catch (NullPointerException e){
 			/**Ha NullPointert kapunk, akkor még nincsenek mentett adatok**/
 		}
+	}
+
+
+	public static WeatherBackground weatherBackground;
+	public static PermanentTimer weatherAct;
+
+	public void createWeather(){
+		weatherBackground = new WeatherBackground(new ResponseViewport(800),this);
+		weatherAct = new PermanentTimer(new PermanentTimerListener(){
+			@Override
+			public void onTick(PermanentTimer sender, float correction) {
+				super.onTick(sender, correction);
+				weatherCalculation.step(correction*800);
+				weatherBackground.setTime(weatherCalculation.getTime());
+				weatherBackground.setRain(weatherCalculation.getRain());
+				weatherBackground.act(correction);
+				if(weatherCalculation.getM()==0){
+					preferences.putFloat("time",weatherCalculation.getTime());
+					preferences.flush();
+				}
+				System.out.println(weatherCalculation.getTimeToString());
+			}
+		});
 	}
 
 	private static void setDisplay(){

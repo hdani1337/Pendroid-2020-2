@@ -33,7 +33,6 @@ public class InfoStage extends PrettyStage {
         super(game);
     }
 
-    private OneSpriteStaticActor bg;
     private OneSpriteStaticActor textBg;
     private MyLabel text;
     private OneSpriteStaticActor back;
@@ -47,7 +46,6 @@ public class InfoStage extends PrettyStage {
         //SoundManager.assign();
         //if(!muted)
         //    SoundManager.menuMusic.play();
-        bg = new OneSpriteStaticActor(game,MENU_BG_TEXTURE);
         back = new OneSpriteStaticActor(game, BACKBUTTON_TEXTURE);
         back.setRotation(180);
         textBg = new OneSpriteStaticActor(game,TEXTBACKGROUND_TEXTURE);
@@ -74,8 +72,6 @@ public class InfoStage extends PrettyStage {
 
     @Override
     public void setSizes() {
-        if(getViewport().getWorldWidth() > bg.getWidth()) bg.setWidth(getViewport().getWorldWidth());
-        if(getViewport().getWorldHeight() > bg.getHeight()) bg.setHeight(getViewport().getWorldHeight());
         infoLogo.setSize(infoLogo.getWidth()*0.9f,infoLogo.getHeight()*0.9f);
         textBg.setSize(text.getWidth()+60,text.getHeight()+30);
         back.setSize(160,160);
@@ -83,7 +79,6 @@ public class InfoStage extends PrettyStage {
 
     @Override
     public void setPositions() {
-        if(getViewport().getWorldWidth() < bg.getWidth()) bg.setX((getViewport().getWorldWidth()-bg.getWidth())/2);
         back.setPosition(getViewport().getWorldWidth() - back.getWidth()-16,16);
         infoLogo.setPosition(getViewport().getWorldWidth()/2 - infoLogo.getWidth()/2, getViewport().getWorldHeight() - infoLogo.getHeight()*1.1f);
         text.setAlignment(Align.center);
@@ -109,7 +104,6 @@ public class InfoStage extends PrettyStage {
 
     @Override
     public void addActors() {
-        addActor(bg);
         addActor(textBg);
         addActor(text);
         addActor(infoLogo);
@@ -136,7 +130,7 @@ public class InfoStage extends PrettyStage {
                 setAlpha();
                 alpha -= 0.05;
                 if(bgAlpha<0.95) bgAlpha+= 0.05;
-                bg.setAlpha(bgAlpha);
+
             } else {
                 //Ha már nem látszanak akkor megyünk vissza a menübe
                 alpha = 0;
@@ -154,7 +148,7 @@ public class InfoStage extends PrettyStage {
 
         if(bgAlpha>0.65 && !setBack){
             bgAlpha-=0.025;
-            bg.setAlpha(bgAlpha);
+
         }
     }
 

@@ -203,4 +203,9 @@ public class WeatherBackground extends WeatherAbstract {
         }
 
     }
+
+    @Override
+    public void dispose() {
+        //just do nothing...¯\_(ツ)_/¯
+    }
 }

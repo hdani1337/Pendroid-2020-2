@@ -30,7 +30,7 @@ public class IntroStage extends PrettyStage {
         assetList.addTexture(PENDROID_TEXTURE);
         assetList.addFont(RETRO_FONT, RETRO_FONT, 32, Color.WHITE, AssetList.CHARS);
     }
-    private OneSpriteStaticActor bg;
+
     private OneSpriteStaticActor gdxLogo;
     private OneSpriteStaticActor csanyLogo;
     private OneSpriteStaticActor csapatLogo;
@@ -45,7 +45,6 @@ public class IntroStage extends PrettyStage {
     //region Absztrakt metódusok
     @Override
     public void assignment() {
-        bg = new OneSpriteStaticActor(game, MENU_BG_TEXTURE);
         gdxLogo = new OneSpriteStaticActor(game, GDX_TEXTURE);
         csanyLogo = new OneSpriteStaticActor(game, CSANY_TEXTURE);
         csapatLogo = new OneSpriteStaticActor(game, CSAPAT_TEXTURE);
@@ -62,14 +61,11 @@ public class IntroStage extends PrettyStage {
 
     @Override
     public void setSizes() {
-        if(getViewport().getWorldWidth() > bg.getWidth()) bg.setWidth(getViewport().getWorldWidth());
-        if(getViewport().getWorldHeight() > bg.getHeight()) bg.setHeight(getViewport().getWorldHeight());
+
     }
 
     @Override
     public void setPositions() {
-        if(getViewport().getWorldWidth() < bg.getWidth()) bg.setX((getViewport().getWorldWidth()-bg.getWidth())/2);
-
         gdxLogo.setPosition(getViewport().getWorldWidth()/2-gdxLogo.getWidth()/2,getViewport().getWorldHeight()/2-gdxLogo.getHeight()/2);
         pendroidLogo.setPosition(getViewport().getWorldWidth()/2-pendroidLogo.getWidth()-50, getViewport().getWorldHeight()/2-pendroidLogo.getHeight()/2);
         csanyLogo.setPosition(getViewport().getWorldWidth()/2+50, getViewport().getWorldHeight()/2-csanyLogo.getHeight()/2);
@@ -89,7 +85,6 @@ public class IntroStage extends PrettyStage {
 
     @Override
     public void addActors() {
-        addActor(bg);
         addActor(gdxLogo);
         addActor(csanyLogo);
         addActor(copyright);
@@ -134,9 +129,6 @@ public class IntroStage extends PrettyStage {
     @Override
     public void act(float delta) {
         super.act(delta);
-        if((1/6.0f) * elapsedTime < 1) bg.setAlpha((1/6.0f) * elapsedTime);
-        else bg.setAlpha(1);
-
         switch (index) {
             case 0: {
                 pElapsed += delta;
