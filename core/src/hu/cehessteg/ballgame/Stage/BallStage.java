@@ -9,11 +9,15 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.PrettySimpleStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 
 public class BallStage extends Box2dStage {
-    public static boolean gameOver;
+    public static boolean isGameOver;
+    public static boolean isAct;
+    public static long score;
 
     public BallStage(MyGame game) {
         super(new ResponseViewport(9),game);
-        gameOver = false;
+        isGameOver = false;
+        isAct = true;
+        score = 0;
         addActor(new Border(game,world, BorderType.ALSO,this));
         /*addActor(new Border(game,world, BorderType.BAL,this));
         addActor(new Border(game,world, BorderType.JOBB,this));

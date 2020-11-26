@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import hu.cehessteg.ballgame.Screen.GameScreen;
+import hu.cehessteg.ballgame.Stage.BallStage;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyStage;
@@ -29,7 +30,7 @@ public class Pause extends OneSpriteStaticActor {
                 if(getStage() != null && getStage() instanceof MyStage) {
                     if (((MyStage) getStage()).getScreen() != null) {
                         if (((MyStage) getStage()).getScreen() instanceof GameScreen){}
-                            //CardStage.isAct = false;
+                            BallStage.isAct = false;
                     }
                 }
             }

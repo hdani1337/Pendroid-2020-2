@@ -27,10 +27,10 @@ public class GameScreen extends MyScreen {
     protected void afterAssetsLoaded() {
         //addStage(new TableStage(game),0,false);
         ballStage = new BallStage(game);
-        //HudStage.stage = cardStage;
+        HudStage.stage = ballStage;
         addStage(ballStage,1,true);
-        //addStage(new HudStage(game),2, true);
-        //addStage(new PauseStage(game),3, true);
+        addStage(new HudStage(game),2, true);
+        addStage(new PauseStage(game),3, true);
         addStage(new GameOverStage(game),4, true);
     }
 

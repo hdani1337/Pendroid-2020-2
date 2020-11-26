@@ -6,6 +6,7 @@ import com.badlogic.gdx.Preferences;
 
 import hu.cehessteg.ballgame.Screen.GameScreen;
 import hu.cehessteg.ballgame.Screen.IntroScreen;
+import hu.cehessteg.ballgame.Screen.MenuScreen;
 import hu.cehessteg.ballgame.Stage.LoadingStage;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 
@@ -24,7 +25,7 @@ public class BallGame extends MyGame {
 	public void create() {
 		super.create();
 		setLoadingStage(new LoadingStage(this));
-		setScreen(new GameScreen(this));
+		setScreen(new MenuScreen(this));
 		try {
 			preferences = Gdx.app.getPreferences("frameworkSave");
 			muted = preferences.getBoolean("muted");

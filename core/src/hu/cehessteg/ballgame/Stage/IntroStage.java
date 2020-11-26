@@ -12,7 +12,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.PrettyStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
-import static hu.cehessteg.ballgame.Hud.ScoreBoard.RETRO_FONT;
+import static hu.cehessteg.ballgame.Hud.TextBox.RETRO_FONT;
 import static hu.cehessteg.ballgame.Stage.MenuStage.MENU_BG_TEXTURE;
 
 public class IntroStage extends PrettyStage {

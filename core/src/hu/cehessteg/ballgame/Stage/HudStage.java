@@ -1,7 +1,7 @@
 package hu.cehessteg.ballgame.Stage;
 
 import hu.cehessteg.ballgame.Hud.Pause;
-import hu.cehessteg.ballgame.Hud.ScoreBoard;
+import hu.cehessteg.ballgame.Hud.TextBox;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.PrettyStage;
@@ -12,9 +12,9 @@ public class HudStage extends PrettyStage {
         //add assets here
     }
 
-    //public static CardStage stage;//Hátha kell a GameStageből valami
+    public static BallStage stage;//Hátha kell a GameStageből valami
     private Pause pause;
-    private ScoreBoard scoreBoard;
+    private TextBox scoreBoard;
 
     public HudStage(MyGame game) {
         super(game);
@@ -23,19 +23,18 @@ public class HudStage extends PrettyStage {
     @Override
     public void assignment() {
         pause = new Pause(game);
-        scoreBoard = new ScoreBoard(game);
+        scoreBoard = new TextBox(game,"0");
     }
 
     @Override
     public void setSizes() {
         pause.setSize(140,140);
-        scoreBoard.setSizes(getViewport());
     }
 
     @Override
     public void setPositions() {
         pause.setPosition(15,getViewport().getWorldHeight()-pause.getHeight()-15);
-        scoreBoard.setPosition(getViewport().getWorldWidth()-scoreBoard.getWidth(),0);
+        scoreBoard.setPosition(getViewport().getWorldWidth()/2-scoreBoard.getWidth()/2,getViewport().getWorldHeight()-scoreBoard.getHeight()-15);
     }
 
     @Override
@@ -52,5 +51,12 @@ public class HudStage extends PrettyStage {
     public void addActors() {
         addActor(scoreBoard);
         addActor(pause);
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        if(scoreBoard.text != BallStage.score+"")
+            scoreBoard.setText(BallStage.score+"");
     }
 }

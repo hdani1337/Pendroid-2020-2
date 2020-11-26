@@ -24,6 +24,10 @@ import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleWorldHelper;
 import hu.csanyzeg.master.MyBaseClasses.Timers.PermanentTimer;
 import hu.csanyzeg.master.MyBaseClasses.Timers.PermanentTimerListener;
 
+import static hu.cehessteg.ballgame.Stage.BallStage.isAct;
+import static hu.cehessteg.ballgame.Stage.BallStage.isGameOver;
+import static hu.cehessteg.ballgame.Stage.BallStage.score;
+
 public class Ball extends OneSpriteStaticActor {
     public boolean started;
 
@@ -36,10 +40,13 @@ public class Ball extends OneSpriteStaticActor {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                if(started == false) started = true;
-                ((Box2DWorldHelper)getActorWorldHelper()).getBody().applyForceToCenter((getWidth()*0.4f-x)*3000,(getHeight()*0.75f-y)*8000,true);
-                setOrigintoCenter();
-                //((SimpleWorldHelper)getActorWorldHelper()).getBody().rotateTo(5,(getWidth()*0.4f-x*(getHeight()*0.45f-y)*5)*90);
+                if(!isGameOver && isAct) {
+                    if (started == false) started = true;
+                    ((Box2DWorldHelper) getActorWorldHelper()).getBody().applyForceToCenter((getWidth() * 0.4f - x) * 3000, (getHeight() * 0.75f - y) * 8000, true);
+                    setOrigintoCenter();
+                    score++;
+                    //((SimpleWorldHelper)getActorWorldHelper()).getBody().rotateTo(5,(getWidth()*0.4f-x*(getHeight()*0.45f-y)*5)*90);
+                }
             }
         });
         ((Box2DWorldHelper)getActorWorldHelper()).addContactListener(new MyContactListener(){
@@ -48,8 +55,8 @@ public class Ball extends OneSpriteStaticActor {
                 if(otherHelper.actor instanceof Border){
                     if(((Border) otherHelper.actor).type == BorderType.ALSO){
                         if(started){
-                            System.out.println("patt");
-                            BallStage.gameOver = true;
+                            isGameOver = true;
+                            isAct = false;
                         }
                     }
                 }
@@ -75,8 +82,10 @@ public class Ball extends OneSpriteStaticActor {
             @Override
             public void onTick(PermanentTimer sender, float correction) {
                 super.onTick(sender, correction);
-                if(getX()<-getWidth() || getX()>getStage().getWidth()+getWidth())
-                    BallStage.gameOver = true;
+                if(getX()<-getWidth() || getX()>getStage().getWidth()+getWidth()) {
+                    isGameOver = true;
+                    isAct = false;
+                }
             }
         }));
     }

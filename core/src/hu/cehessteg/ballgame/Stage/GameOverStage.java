@@ -142,7 +142,7 @@ public class GameOverStage extends PrettyStage {
          * **/
         if(getScreen() != null){
             if(getScreen() instanceof GameScreen){
-                if(BallStage.gameOver){
+                if(BallStage.isGameOver && !BallStage.isAct){
                     if(gameMusic != null) gameMusic.stop();
                     makeStage();
                 }
@@ -153,8 +153,7 @@ public class GameOverStage extends PrettyStage {
     private float alpha;
     private boolean addedActors;
     private void makeStage(){
-        //if(CardStage.time<0) info.setText("Lejárt az idő!");
-        //pontok.setText("Elért pontszámod\n"+CardStage.score);
+        pontok.setText("Elért pontszámod\n"+BallStage.score);
         setPositions();
 
         //Adjuk hozzá a gombokat a stagehez ha még nincsenek rajta

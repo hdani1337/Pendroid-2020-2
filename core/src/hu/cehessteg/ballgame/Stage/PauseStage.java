@@ -76,7 +76,7 @@ public class PauseStage extends PrettyStage {
                 super.clicked(event, x, y);
                 if(getScreen() != null) {
                     if (getScreen() instanceof GameScreen){}
-                        //CardStage.isAct = true;
+                        BallStage.isAct = true;
                 }
             }
         });
@@ -145,8 +145,8 @@ public class PauseStage extends PrettyStage {
         super.act(delta);
         if(getScreen() != null) {
             if (getScreen() instanceof GameScreen) {
-                /*if (!CardStage.isAct && !CardStage.isGameOver) pause(null);
-                else if (CardStage.isAct && addedActors) resume(null);*/
+                if (!BallStage.isAct && !BallStage.isGameOver) pause(null);
+                else if (BallStage.isAct && addedActors) resume(null);
             }
         }
     }
@@ -154,10 +154,10 @@ public class PauseStage extends PrettyStage {
     @Deprecated
     private void pause(Music music){
         if(getScreen() != null && (getScreen() instanceof GameScreen)){
-            /*if(!pontok.text.equals("Jelenlegi pontszámod\n"+CardStage.score)) {
-                pontok.setText("Jelenlegi pontszámod\n"+CardStage.score);
+            if(!pontok.text.equals("Jelenlegi pontszámod\n"+BallStage.score)) {
+                pontok.setText("Jelenlegi pontszámod\n"+BallStage.score);
                 pontok.setX(getViewport().getWorldWidth()/2-pontok.getWidth()/2);
-            }*/
+            }
         }
         //Adjuk hozzá a gombokat a stagehez ha még nincsenek rajta
         if(!addedActors) {
