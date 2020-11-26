@@ -155,7 +155,8 @@ public class WeatherBackground extends WeatherAbstract {
 
     public WeatherBackground(Viewport viewport, MyGame game) {
         super(viewport, game);
-        skyActor = new SkyActor(game,getWidth(), getWidth());
+        this.viewport = viewport;
+        skyActor = new SkyActor(game,viewport.getWorldWidth(), viewport.getWorldHeight());
         sunActor = new SunActor(game,getWidth() / 2, (getWidth() / 16 * 9) / 2);
         sunActor.setX(getWidth() / 2 - sunActor.getWidth() / 2);
 
@@ -165,12 +166,14 @@ public class WeatherBackground extends WeatherAbstract {
         sunActor.setDebug(false);
     }
 
+    private Viewport viewport;
+
     @Override
     public void act(float delta) {
         super.act(delta);
         elapsedTime+=delta;
         float light = getLight(time);
-        skyActor.setY(-(skyActor.getHeight() - getHeight()) + light * skyActor.getHeight() * 0.8f);
+        //skyActor.setY(-(skyActor.getHeight() - getHeight()) + light * skyActor.getHeight() * 0.8f);
         skyActor.setRain(rain);
 
         sunActor.setY(getHeight() * 0.92f - sunActor.getHeight() / 2 + getHeight() * getSunPosition(time) / 3f);
@@ -192,9 +195,9 @@ public class WeatherBackground extends WeatherAbstract {
         if (cofc < rainfactor) {
             Cloud c;
             addActor(c = new Cloud(game));
-            c.setPosition(random.nextInt((int)getWidth() * 2) - (int)getWidth(), getHeight() *0.85f - random.nextInt((int)(getHeight() / 8f)));
-            c.setWidth(getWidth() / 2);
-            c.setHeight(getHeight() / 3);
+            c.setPosition(random.nextInt((int)getWidth() * 2) - (int)getWidth(), getHeight() *0.85f - random.nextInt((int)(getHeight() / 2f)));
+            c.setWidth(c.getWidth() / 2);
+            c.setHeight(c.getHeight() / 2);
             //c.setY(-(c.getHeight() - getHeight()));
 
         }

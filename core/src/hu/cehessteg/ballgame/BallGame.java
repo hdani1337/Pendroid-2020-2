@@ -8,9 +8,12 @@ import hu.cehessteg.ballgame.Screen.GameScreen;
 import hu.cehessteg.ballgame.Screen.IntroScreen;
 import hu.cehessteg.ballgame.Screen.MenuScreen;
 import hu.cehessteg.ballgame.Stage.LoadingStage;
+import hu.cehessteg.ballgame.Stage.WeatherCalculation;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 
 public class BallGame extends MyGame {
+	public static WeatherCalculation weatherCalculation;
+
 	public BallGame(){
 	}
 
@@ -26,11 +29,13 @@ public class BallGame extends MyGame {
 		super.create();
 		setLoadingStage(new LoadingStage(this));
 		setScreen(new MenuScreen(this));
+		weatherCalculation = new WeatherCalculation(0);
 		try {
 			preferences = Gdx.app.getPreferences("frameworkSave");
 			muted = preferences.getBoolean("muted");
 			Gdx.app.getGraphics().setTitle("Remember Me");
 			Gdx.app.getGraphics().setResizable(false);
+			weatherCalculation.setTime(preferences.getFloat("time"));
 			//setDisplay();
 		}catch (NullPointerException e){
 			/**Ha NullPointert kapunk, akkor még nincsenek mentett adatok**/
@@ -46,5 +51,7 @@ public class BallGame extends MyGame {
 				Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		}
 	}
+
+
 }
 
