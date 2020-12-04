@@ -12,6 +12,7 @@ import hu.csanyzeg.master.MyBaseClasses.Timers.PermanentTimerListener;
 import static hu.cehessteg.ballgame.BallGame.preferences;
 import static hu.cehessteg.ballgame.BallGame.weatherAct;
 import static hu.cehessteg.ballgame.BallGame.weatherBackground;
+import static hu.cehessteg.ballgame.BallGame.weatherForeGround;
 
 
 public class OptionsScreen extends MyScreen {
@@ -29,6 +30,7 @@ public class OptionsScreen extends MyScreen {
     protected void afterAssetsLoaded() {
         addStage(weatherBackground,0,false);
         addTimer(weatherAct);
+        addStage(weatherForeGround,1,false);
         addStage(new OptionsStage(game),1,true);
     }
 

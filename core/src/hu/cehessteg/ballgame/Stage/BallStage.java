@@ -1,6 +1,7 @@
 package hu.cehessteg.ballgame.Stage;
 
 import hu.cehessteg.ballgame.Actor.Ball;
+import hu.cehessteg.ballgame.Actor.BallType;
 import hu.cehessteg.ballgame.Actor.Border;
 import hu.cehessteg.ballgame.Actor.BorderType;
 import hu.csanyzeg.master.MyBaseClasses.Box2dWorld.Box2dStage;
@@ -23,8 +24,16 @@ public class BallStage extends Box2dStage {
         addActor(new Border(game,world, BorderType.JOBB,this));
         addActor(new Border(game,world, BorderType.FELSO,this));*/
 
-        Ball ball = new Ball(game,world);
+        Ball ball = new Ball(game,world, BallType.SOCCER);
         ball.setPosition(getViewport().getWorldWidth()/2-ball.getWidth()/2,1);
         addActor(ball);
+    }
+
+    @Override
+    public void act(float delta) {
+        if(isAct)
+            super.act(delta);
+        else if(isGameOver)
+            super.act(delta);
     }
 }

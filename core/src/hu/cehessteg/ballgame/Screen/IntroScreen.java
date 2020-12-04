@@ -14,6 +14,7 @@ import static hu.cehessteg.ballgame.BallGame.preferences;
 import static hu.cehessteg.ballgame.BallGame.weatherAct;
 import static hu.cehessteg.ballgame.BallGame.weatherBackground;
 import static hu.cehessteg.ballgame.BallGame.weatherCalculation;
+import static hu.cehessteg.ballgame.BallGame.weatherForeGround;
 
 public class IntroScreen extends MyScreen {
     public static AssetList assetList = new AssetList();
@@ -31,6 +32,7 @@ public class IntroScreen extends MyScreen {
         ((BallGame)game).createWeather();
         addStage(weatherBackground,0,false);
         addTimer(weatherAct);
+        addStage(weatherForeGround,1,false);
         addStage(new IntroStage(game),1,false);
     }
 

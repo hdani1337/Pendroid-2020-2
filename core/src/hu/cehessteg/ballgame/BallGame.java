@@ -11,6 +11,7 @@ import hu.cehessteg.ballgame.Screen.OptionsScreen;
 import hu.cehessteg.ballgame.Stage.LoadingStage;
 import hu.cehessteg.ballgame.Stage.WeatherBackground;
 import hu.cehessteg.ballgame.Stage.WeatherCalculation;
+import hu.cehessteg.ballgame.Stage.WeatherForeGround;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.Timers.PermanentTimer;
@@ -49,10 +50,12 @@ public class BallGame extends MyGame {
 
 
 	public static WeatherBackground weatherBackground;
+	public static WeatherForeGround weatherForeGround;
 	public static PermanentTimer weatherAct;
 
 	public void createWeather(){
 		weatherBackground = new WeatherBackground(new ResponseViewport(800),this);
+		weatherForeGround = new WeatherForeGround(this);
 		weatherAct = new PermanentTimer(new PermanentTimerListener(){
 			@Override
 			public void onTick(PermanentTimer sender, float correction) {
@@ -60,12 +63,14 @@ public class BallGame extends MyGame {
 				weatherCalculation.step(correction*800);
 				weatherBackground.setTime(weatherCalculation.getTime());
 				weatherBackground.setRain(weatherCalculation.getRain());
+				weatherForeGround.setTime(weatherCalculation.getRain());
+				weatherForeGround.setRain(weatherCalculation.getRain());
 				weatherBackground.act(correction);
+				weatherForeGround.act(correction);
 				if(weatherCalculation.getM()==0){
 					preferences.putFloat("time",weatherCalculation.getTime());
 					preferences.flush();
 				}
-				System.out.println(weatherCalculation.getTimeToString());
 			}
 		});
 	}

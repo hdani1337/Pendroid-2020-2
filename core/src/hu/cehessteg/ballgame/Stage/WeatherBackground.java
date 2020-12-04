@@ -17,8 +17,6 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class WeatherBackground extends WeatherAbstract {
-    private static AssetManager manager = null;
-
     private static Random random = new Random();
 
     private static final String SKYCLEAR_TEXTURE = "weather/skyclear.png";

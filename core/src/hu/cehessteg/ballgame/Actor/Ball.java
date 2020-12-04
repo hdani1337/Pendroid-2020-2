@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import hu.cehessteg.ballgame.Stage.BallStage;
+import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Box2dWorld.Box2DWorldHelper;
 import hu.csanyzeg.master.MyBaseClasses.Box2dWorld.MyContactListener;
 import hu.csanyzeg.master.MyBaseClasses.Box2dWorld.MyFixtureDef;
@@ -24,23 +25,35 @@ import hu.csanyzeg.master.MyBaseClasses.SimpleWorld.SimpleWorldHelper;
 import hu.csanyzeg.master.MyBaseClasses.Timers.PermanentTimer;
 import hu.csanyzeg.master.MyBaseClasses.Timers.PermanentTimerListener;
 
+import static hu.cehessteg.ballgame.BallGame.muted;
 import static hu.cehessteg.ballgame.Stage.BallStage.isAct;
 import static hu.cehessteg.ballgame.Stage.BallStage.isGameOver;
 import static hu.cehessteg.ballgame.Stage.BallStage.score;
 
 public class Ball extends OneSpriteStaticActor {
     public boolean started;
+    protected BallType ballType;
 
-    public Ball(MyGame game, World world) {
+    public static AssetList assetList = new AssetList();
+    static {
+        assetList.addSound("sound/soccer.mp3");
+        assetList.addSound("sound/volleyball.mp3");
+        assetList.addSound("sound/tennis.mp3");
+        assetList.addSound("sound/basketball.mp3");
+    }
+
+    public Ball(MyGame game, World world, BallType ballType) {
         super(game, "pic/gombok/info_i.png");
         this.started = false;
-        setActorWorldHelper(new Box2DWorldHelper(world,this, ShapeType.Circle, new MyFixtureDef(), BodyDef.BodyType.DynamicBody));
-        setSize(2,2);
+        this.ballType = ballType;
+        setSize(2.5f,2.5f);
+        setActorWorldHelper(new Box2DWorldHelper(world,this, ShapeType.Circle, getFixtureDef(), BodyDef.BodyType.DynamicBody));
         addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
                 if(!isGameOver && isAct) {
+                    playSound();
                     if (started == false) started = true;
                     ((Box2DWorldHelper) getActorWorldHelper()).getBody().applyForceToCenter((getWidth() * 0.4f - x) * 3000, (getHeight() * 0.75f - y) * 8000, true);
                     setOrigintoCenter();
@@ -57,6 +70,7 @@ public class Ball extends OneSpriteStaticActor {
                         if(started){
                             isGameOver = true;
                             isAct = false;
+                            playSound();
                         }
                     }
                 }
@@ -88,5 +102,54 @@ public class Ball extends OneSpriteStaticActor {
                 }
             }
         }));
+    }
+
+    public void playSound(){
+        if(true){
+            switch (ballType) {
+                case SOCCER:
+                    game.getMyAssetManager().getSound("sound/soccer.mp3").play();
+                    break;
+                case VOLLEY:
+                    game.getMyAssetManager().getSound("sound/volleyball.mp3").play();
+                    break;
+                case BASKET:
+                    game.getMyAssetManager().getSound("sound/basketball.mp3").play();
+                    break;
+                case TENNIS:
+                    game.getMyAssetManager().getSound("sound/tennis.mp3").play();
+                    break;
+            }
+        }
+    }
+
+    protected String getHash(){
+        switch (ballType) {
+            case SOCCER:
+                return null;
+            case VOLLEY:
+                return null;
+            case BASKET:
+                return null;
+            case TENNIS:
+                return null;
+            default:
+                return null;
+        }
+    }
+
+    protected MyFixtureDef getFixtureDef(){
+        switch (ballType) {
+            case SOCCER:
+                return new MyFixtureDef(5);
+            case VOLLEY:
+                return new MyFixtureDef(4);
+            case BASKET:
+                return new MyFixtureDef(4.5f);
+            case TENNIS:
+                return new MyFixtureDef(2);
+            default:
+                return new MyFixtureDef();
+        }
     }
 }

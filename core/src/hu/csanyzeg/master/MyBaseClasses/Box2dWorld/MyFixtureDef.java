@@ -20,6 +20,10 @@ public class MyFixtureDef {
 
     }
 
+    public MyFixtureDef(float density){
+        this.density = density;
+    }
+
     public MyFixtureDef(float friction, float restitution, float density, boolean isSensor) {
         this.friction = friction;
         this.restitution = restitution;
