@@ -62,9 +62,7 @@ public class BallGame extends MyGame {
 				super.onTick(sender, correction);
 				weatherCalculation.step(correction*800);
 				weatherBackground.setTime(weatherCalculation.getTime());
-				weatherBackground.setRain(weatherCalculation.getRain());
-				weatherForeGround.setTime(weatherCalculation.getRain());
-				weatherForeGround.setRain(weatherCalculation.getRain());
+				weatherForeGround.setTime(weatherCalculation.getTime());
 				weatherBackground.act(correction);
 				weatherForeGround.act(correction);
 				if(weatherCalculation.getM()==0){

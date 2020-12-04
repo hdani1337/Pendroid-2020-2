@@ -38,15 +38,14 @@ public class Ball extends OneSpriteStaticActor {
     static {
         assetList.addSound("sound/soccer.mp3");
         assetList.addSound("sound/volleyball.mp3");
-        assetList.addSound("sound/tennis.mp3");
+        assetList.addSound("sound/basketball.mp3");
         assetList.addSound("sound/basketball.mp3");
     }
 
     public Ball(MyGame game, World world, BallType ballType) {
-        super(game, "pic/gombok/info_i.png");
+        super(game, getHash(ballType));
         this.started = false;
         this.ballType = ballType;
-        setSize(2.5f,2.5f);
         setActorWorldHelper(new Box2DWorldHelper(world,this, ShapeType.Circle, getFixtureDef(), BodyDef.BodyType.DynamicBody));
         addListener(new ClickListener(){
             @Override
@@ -70,7 +69,7 @@ public class Ball extends OneSpriteStaticActor {
                         if(started){
                             isGameOver = true;
                             isAct = false;
-                            playSound();
+                            if(getX()>-getWidth() && getX()<getStage().getViewport().getWorldWidth()+getWidth()) playSound();
                         }
                     }
                 }
@@ -105,7 +104,7 @@ public class Ball extends OneSpriteStaticActor {
     }
 
     public void playSound(){
-        if(true){
+        if(!muted){
             switch (ballType) {
                 case SOCCER:
                     game.getMyAssetManager().getSound("sound/soccer.mp3").play();
@@ -116,38 +115,40 @@ public class Ball extends OneSpriteStaticActor {
                 case BASKET:
                     game.getMyAssetManager().getSound("sound/basketball.mp3").play();
                     break;
-                case TENNIS:
-                    game.getMyAssetManager().getSound("sound/tennis.mp3").play();
+                case BASEBALL:
+                    game.getMyAssetManager().getSound("sound/baseball.mp3").play();
                     break;
             }
         }
     }
 
-    protected String getHash(){
+    protected static String getHash(BallType ballType){
         switch (ballType) {
-            case SOCCER:
-                return null;
+            case SOCCER: default:
+                return "pic/gombok/info_i.png";
             case VOLLEY:
-                return null;
+                return "ropLabda.png";
             case BASKET:
-                return null;
-            case TENNIS:
-                return null;
-            default:
-                return null;
+                return "kosarLabda.png";
+            case BASEBALL:
+                return "BaseballLabda.png";
         }
     }
 
     protected MyFixtureDef getFixtureDef(){
         switch (ballType) {
             case SOCCER:
+                setSize(2.5f,2.5f);
                 return new MyFixtureDef(5);
             case VOLLEY:
+                setSize(2.5f,2.5f);
                 return new MyFixtureDef(4);
             case BASKET:
+                setSize(2.5f,2.5f);
                 return new MyFixtureDef(4.5f);
-            case TENNIS:
-                return new MyFixtureDef(2);
+            case BASEBALL:
+                setSize(1,1);
+                return new MyFixtureDef(7);
             default:
                 return new MyFixtureDef();
         }

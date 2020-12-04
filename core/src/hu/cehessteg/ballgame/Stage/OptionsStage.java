@@ -30,16 +30,13 @@ public class OptionsStage extends PrettyStage {
         assetList.collectAssetDescriptor(Logo.class,assetList);
     }
 
-    public static int difficulty = preferences.getInteger("difficulty");
-    public static int gamemode = preferences.getInteger("gamemode");
-    public static int size = preferences.getInteger("size");
+    public static int ballType = preferences.getInteger("ballType");
 
     private Logo optionsLogo;
 
     private OneSpriteStaticActor backButton;
-    private OptionSwitch sizeButton;
-    private OptionSwitch gameModeButton;
-    private OptionSwitch difficultyButton;
+    private OptionSwitch ballTypeButton;
+    private OptionSwitch muteButton;
 
     private boolean setBack;
 
@@ -54,9 +51,8 @@ public class OptionsStage extends PrettyStage {
             SoundManager.menuMusic.play();
         setBack = false;
         backButton = new OneSpriteStaticActor(game,BACKBUTTON_TEXTURE);
-        gameModeButton = new OptionSwitch(game, OptionSwitchType.GAMEMODE);
-        difficultyButton = new OptionSwitch(game, OptionSwitchType.DIFFICULTY);
-        sizeButton = new OptionSwitch(game,OptionSwitchType.SIZE);
+        ballTypeButton = new OptionSwitch(game, OptionSwitchType.BALLTYPE);
+        muteButton = new OptionSwitch(game, OptionSwitchType.MUTE);
         optionsLogo = new Logo(game, Logo.LogoType.OPTIONS);
     }
 
@@ -70,9 +66,8 @@ public class OptionsStage extends PrettyStage {
         backButton.setRotation(180);
         backButton.setPosition(getViewport().getWorldWidth() - backButton.getWidth()-16,16);
         optionsLogo.setPosition(getViewport().getWorldWidth()/2 - optionsLogo.getWidth()/2, getViewport().getWorldHeight() - optionsLogo.getHeight()*1.15f);
-        gameModeButton.setPosition(getViewport().getWorldWidth()/2-gameModeButton.getWidth()/2,getViewport().getWorldHeight()-570);
-        difficultyButton.setPosition(getViewport().getWorldWidth()/2-difficultyButton.getWidth()/2,getViewport().getWorldHeight()-420);
-        sizeButton.setPosition(getViewport().getWorldWidth()/2-sizeButton.getWidth()/2,getViewport().getWorldHeight()-720);
+        ballTypeButton.setPosition(getViewport().getWorldWidth()/2-ballTypeButton.getWidth()/2,getViewport().getWorldHeight()-570);
+        muteButton.setPosition(getViewport().getWorldWidth()/2-muteButton.getWidth()/2,getViewport().getWorldHeight()-420);
     }
 
     @Override
@@ -82,9 +77,8 @@ public class OptionsStage extends PrettyStage {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                preferences.putInteger("difficulty",difficulty);
-                preferences.putInteger("gamemode",gamemode);
-                preferences.putInteger("size",size);
+                preferences.putInteger("ballType",ballType);
+                preferences.putBoolean("muted",muted);
                 preferences.flush();
                 setBack = true;
             }
@@ -99,10 +93,9 @@ public class OptionsStage extends PrettyStage {
     @Override
     public void addActors() {
         addActor(optionsLogo);
-        addActor(difficultyButton);
+        addActor(ballTypeButton);
         addActor(backButton);
-        addActor(gameModeButton);
-        addActor(sizeButton);
+        addActor(muteButton);
     }
     //endregion
     //region Act metódusai
@@ -152,9 +145,8 @@ public class OptionsStage extends PrettyStage {
     private void setAlpha(){
         optionsLogo.setAlpha(alpha);
         backButton.setAlpha(alpha);
-        gameModeButton.setAlpha(alpha);
-        difficultyButton.setAlpha(alpha);
-        sizeButton.setAlpha(alpha);
+        muteButton.setAlpha(alpha);
+        ballTypeButton.setAlpha(alpha);
     }
     //endregion
 }

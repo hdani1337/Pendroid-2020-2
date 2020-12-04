@@ -20,11 +20,7 @@ public class BallStage extends Box2dStage {
         isAct = true;
         score = 0;
         addActor(new Border(game,world, BorderType.ALSO,this));
-        /*addActor(new Border(game,world, BorderType.BAL,this));
-        addActor(new Border(game,world, BorderType.JOBB,this));
-        addActor(new Border(game,world, BorderType.FELSO,this));*/
-
-        Ball ball = new Ball(game,world, BallType.SOCCER);
+        Ball ball = new Ball(game,world, BallType.values()[OptionsStage.ballType-1]);
         ball.setPosition(getViewport().getWorldWidth()/2-ball.getWidth()/2,1);
         addActor(ball);
     }

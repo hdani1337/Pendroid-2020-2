@@ -15,7 +15,6 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 
 public class WeatherForeGround extends WeatherAbstract {
-
     private static final String NIGHT_TEXTURE = "weather/night.png";
 
     //region AssetList
@@ -27,19 +26,23 @@ public class WeatherForeGround extends WeatherAbstract {
 
     private OneSpriteStaticActor night;
 
+    private final static float nightAlpha = 0.5f;
+
     public WeatherForeGround(MyGame game) {
         super(new ResponseViewport(800), game);
         addActor(night = new OneSpriteStaticActor(game,NIGHT_TEXTURE));
         night.setSize(getWidth(), getHeight());
         night.setDebug(false);
         night.setTouchable(null);
+
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
         elapsedTime += delta;
-        night.setAlpha(time*0.75f);
+        float light = getLight(time);
+        night.setAlpha(nightAlpha * (1f - light));
     }
 
     @Override

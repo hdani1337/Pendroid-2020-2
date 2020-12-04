@@ -15,6 +15,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.MyGroup;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
+import static hu.cehessteg.ballgame.BallGame.muted;
 import static hu.cehessteg.ballgame.BallGame.preferences;
 import static hu.cehessteg.ballgame.Hud.TextBox.VERDANA_FONT;
 
@@ -48,20 +49,15 @@ public class OptionSwitch extends MyGroup implements IPrettyStage {
     @Override
     public void assignment() {
         switch (type){
-            case DIFFICULTY:
+            case BALLTYPE:
                 indexMax = 4;
                 indexMin = 1;
-                indexCounter = OptionsStage.difficulty;
+                indexCounter = OptionsStage.ballType;
                 break;
-            case SIZE:
+            case MUTE:
                 indexMin = 0;
-                indexMax = getMatrixSizes().size()-1;
-                indexCounter = getMatrixSizes().indexOf(OptionsStage.size);
-                break;
-            case GAMEMODE:
-                indexMin = 1;
-                indexMax = 2;
-                indexCounter = OptionsStage.gamemode;
+                indexMax = 1;
+                indexCounter = (muted)?0:1;
                 break;
         }
 
@@ -149,60 +145,44 @@ public class OptionSwitch extends MyGroup implements IPrettyStage {
 
     private void indexCounterChanged(){
         switch (type){
-            case DIFFICULTY:
+            case BALLTYPE:
                 switch (indexCounter){
-                    case 1:{
+                    case 1: default:{
                         decrement.setVisible(false);
-                        text.setText("Nehézség: Könnyű");
+                        text.setText("Labda fajtája: Focilabda");
                         break;
                     }
                     case 2:{
-                        text.setText("Nehézség: Normál");
+                        text.setText("Labda fajtája: Röplabda");
                         break;
                     }
                     case 3:{
-                        text.setText("Nehézség: Nehéz");
+                        text.setText("Labda fajtája: Kosárlabda");
                         break;
                     }
                     case 4:{
                         increment.setVisible(false);
-                        text.setText("Nehézség: Lehetetlen");
-                        break;
-                    }
-                    default:{
-                        text.setText("Nehézség: Normál");
-                        preferences.putInteger("difficulty",2);
-                        preferences.flush();
+                        text.setText("Labda fajtája: Baseball-labda");
                         break;
                     }
                 }
-                OptionsStage.difficulty = indexCounter;
+                OptionsStage.ballType = indexCounter;
                 break;
-            case SIZE:
-                if(getMatrixSizes().get(indexCounter) != 0) {
-                    text.setText("Méret: " + getMatrixSizes().get(indexCounter) / 10 + "x" + getMatrixSizes().get(indexCounter) % 10);
-                    if(getMatrixSizes().get(indexCounter)==86) increment.setVisible(false);
-                }
-                else {
-                    text.setText("Méret: Folyamatos");
-                    decrement.setVisible(false);
-                }
-                OptionsStage.size = getMatrixSizes().get(indexCounter);
-                break;
-            case GAMEMODE:
+            case MUTE:
                 switch (indexCounter){
-                    case 1:{
-                        decrement.setVisible(false);
-                        text.setText("Játékmód: Arcade");
+                    case 1: default:{
+                        increment.setVisible(false);
+                        text.setText("Némítás: Nincs némítva");
+                        muted = false;
                         break;
                     }
-                    default:{
-                        increment.setVisible(false);
-                        text.setText("Játékmód: Zen");
+                    case 0:{
+                        decrement.setVisible(false);
+                        text.setText("Némítás: Némítva");
+                        muted = true;
                         break;
                     }
                 }
-                OptionsStage.gamemode = indexCounter;
                 break;
         }
         setSizes();
