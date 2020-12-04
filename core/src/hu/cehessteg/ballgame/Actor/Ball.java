@@ -125,7 +125,7 @@ public class Ball extends OneSpriteStaticActor {
     protected static String getHash(BallType ballType){
         switch (ballType) {
             case SOCCER: default:
-                return "pic/gombok/info_i.png";
+                return "fociLabda.png";
             case VOLLEY:
                 return "ropLabda.png";
             case BASKET:
