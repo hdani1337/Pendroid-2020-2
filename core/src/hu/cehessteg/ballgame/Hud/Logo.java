@@ -15,7 +15,7 @@ public class Logo extends OneSpriteStaticActor {
     static {
         assetList.addTexture(LOGO_TEXTURE);
         assetList.addTexture("balls/kosarLabda.png");
-        assetList.addTexture("balls/roplabda.png");
+        assetList.addTexture("balls/ropLabda.png");
     }
     //endregion
     //region Logo típus Enum
@@ -44,8 +44,8 @@ public class Logo extends OneSpriteStaticActor {
                 break;
             }
             case INFO:{
-                sprite.setTexture(game.getMyAssetManager().getTexture("balls/roplabda.png"));
-                setSize(game.getMyAssetManager().getTexture("balls/roplabda.png").getWidth()*0.4f,game.getMyAssetManager().getTexture("balls/roplabda.png").getHeight()*0.4f);
+                sprite.setTexture(game.getMyAssetManager().getTexture("balls/ropLabda.png"));
+                setSize(game.getMyAssetManager().getTexture("balls/ropLabda.png").getWidth()*0.4f,game.getMyAssetManager().getTexture("balls/ropLabda.png").getHeight()*0.4f);
                 speed = 24;
                 break;
             }

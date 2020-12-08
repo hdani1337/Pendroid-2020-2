@@ -19,12 +19,44 @@ public class BallStage extends Box2dStage {
         isGameOver = false;
         isAct = true;
         score = 0;
+
         addActor(new Border(game,world, BorderType.ALSO,this));
+
         int index = OptionsStage.ballType-1;
         if (index == -1) index = 0;
-        Ball ball = new Ball(game,world, BallType.values()[index]);
-        ball.setPosition(getViewport().getWorldWidth()/2-ball.getWidth()/2,1);
-        addActor(ball);
+
+        int ballCount = OptionsStage.ballCount;
+        if (ballCount == 0) ballCount = 1;
+
+        switch (ballCount){
+            case 1: {
+                Ball ball = new Ball(game, world, BallType.values()[index]);
+                ball.setPosition(getViewport().getWorldWidth() / 2 - ball.getWidth() / 2, 1);
+                addActor(ball);
+                break;
+            }
+            case 2: {
+                Ball ball1 = new Ball(game, world, BallType.values()[index]);
+                Ball ball2 = new Ball(game, world, BallType.values()[index]);
+                ball1.setPosition(getViewport().getWorldWidth() / 2 - ball1.getWidth() - 0.25f, 1);
+                ball2.setPosition(getViewport().getWorldWidth() / 2 + 0.25f, 1);
+                addActor(ball1);
+                addActor(ball2);
+                break;
+            }
+            case 3: {
+                Ball ball1 = new Ball(game, world, BallType.values()[index]);
+                Ball ball2 = new Ball(game, world, BallType.values()[index]);
+                Ball ball3 = new Ball(game, world, BallType.values()[index]);
+                ball1.setPosition(0.6f, 1);
+                ball2.setPosition(3.35f,1);
+                ball3.setPosition(6.1f,1);
+                addActor(ball1);
+                addActor(ball2);
+                addActor(ball3);
+                break;
+            }
+        }
     }
 
     @Override

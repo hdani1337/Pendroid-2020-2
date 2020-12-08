@@ -17,6 +17,7 @@ import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
 import static hu.cehessteg.ballgame.BallGame.muted;
 import static hu.cehessteg.ballgame.BallGame.preferences;
+import static hu.cehessteg.ballgame.Hud.TextBox.RETRO_FONT;
 import static hu.cehessteg.ballgame.Hud.TextBox.TEXTBOX_TEXTURE;
 import static hu.cehessteg.ballgame.Hud.TextBox.VERDANA_FONT;
 
@@ -58,13 +59,19 @@ public class OptionSwitch extends MyGroup implements IPrettyStage {
                 indexMax = 1;
                 indexCounter = (muted)?0:1;
                 break;
+            case BALLCOUNT:
+                indexMax = 3;
+                indexMin = 1;
+                indexCounter = OptionsStage.ballCount;
         }
+
+        if(indexCounter == 0) indexCounter = indexMin;
 
         decrement = new OneSpriteStaticActor(game,BUTTON_TEXTURE);
         increment = new OneSpriteStaticActor(game,BUTTON_TEXTURE);
         background = new OneSpriteStaticActor(game,TEXTBOX_TEXTURE);
 
-        text = new MyLabel(game, "", new Label.LabelStyle(game.getMyAssetManager().getFont(VERDANA_FONT), Color.WHITE)) {
+        text = new MyLabel(game, "", new Label.LabelStyle(game.getMyAssetManager().getFont((type==OptionSwitchType.BALLCOUNT)?RETRO_FONT:VERDANA_FONT), Color.WHITE)) {
             @Override
             public void init() {
                 setAlignment(0);
@@ -81,6 +88,7 @@ public class OptionSwitch extends MyGroup implements IPrettyStage {
         decrement.setSize(120,120);
         increment.setSize(120,120);
         text.setFontScale(2);
+        if(type == OptionSwitchType.BALLCOUNT) text.setFontScale(1.75f);
         text.setAlignment(Align.center);
         background.setSize((getMaxRowWidth()+1)*36,256);
     }
@@ -123,6 +131,7 @@ public class OptionSwitch extends MyGroup implements IPrettyStage {
                         if(!decrement.isVisible()) decrement.setVisible(true);
                     }
                     else indexCounter = indexMax;
+                    System.out.println(indexCounter);
                     indexCounterChanged();
                 }
             }
@@ -136,10 +145,18 @@ public class OptionSwitch extends MyGroup implements IPrettyStage {
 
     @Override
     public void addActors() {
-        addActor(decrement);
-        addActor(increment);
         addActor(background);
         addActor(text);
+        addActor(decrement);
+        addActor(increment);
+
+        text.setTouchable(null);
+        background.setTouchable(null);
+
+        background.setZIndex(0);
+        text.setZIndex(10);
+        increment.setZIndex(1000);
+        decrement.setZIndex(1000);
     }
 
     private void indexCounterChanged(){
@@ -182,6 +199,25 @@ public class OptionSwitch extends MyGroup implements IPrettyStage {
                         break;
                     }
                 }
+                break;
+            case BALLCOUNT:
+                switch (indexCounter){
+                    case 1: default:{
+                        decrement.setVisible(false);
+                        text.setText("Labdák mennyisége\n1");
+                        break;
+                    }
+                    case 2:{
+                        text.setText("Labdák mennyisége\n2");
+                        break;
+                    }
+                    case 3:{
+                        increment.setVisible(false);
+                        text.setText("Labdák mennyisége\n3");
+                        break;
+                    }
+                }
+                OptionsStage.ballCount = indexCounter;
                 break;
         }
         setSizes();

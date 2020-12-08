@@ -60,8 +60,9 @@ public class InfoStage extends PrettyStage {
                 "vagy kimegy a képből, akkor véget ér a játék.\n" +
                 "Továbbá az Opciók menüpontban kedvünkre\n" +
                 "választhatunk a rendelkezésre álló labdákból,\n" +
-                "ami mentésre is kerül, így a kilépés után is\n" +
-                "megmarad a kiválasztott állapot.\n\n" +
+                "illetve hány labdával szeretnénk játszani egyszerre\n" +
+                "amik mentésre is kerülnek, így a kilépés után is\n" +
+                "megmaradnak a kiválasztott állapotok.\n\n" +
                 "Jó játékot kíván a Céhessteg csapata!";
 
         text = new MyLabel(game, infoText, new Label.LabelStyle(game.getMyAssetManager().getFont(VERDANA_FONT), Color.WHITE)) {
@@ -78,7 +79,7 @@ public class InfoStage extends PrettyStage {
     @Override
     public void setSizes() {
         infoLogo.setSize(infoLogo.getWidth()*0.9f,infoLogo.getHeight()*0.9f);
-        textBg.setSize(text.getWidth()+120,text.getHeight()+100);
+        textBg.setSize(text.getWidth()+120,text.getHeight()+140);
         back.setSize(180,180);
     }
 
@@ -88,7 +89,7 @@ public class InfoStage extends PrettyStage {
         infoLogo.setPosition(getViewport().getWorldWidth()/2 - infoLogo.getWidth()/2,getViewport().getWorldHeight() - infoLogo.getHeight()*1.1f);
         text.setAlignment(Align.center);
         text.setPosition(getViewport().getWorldWidth()/2-text.getWidth()/2,playfieldActor.getHeight()*0.75f);
-        textBg.setPosition(text.getX()-60,text.getY()-50);
+        textBg.setPosition(text.getX()-60,text.getY()-70);
     }
 
     @Override

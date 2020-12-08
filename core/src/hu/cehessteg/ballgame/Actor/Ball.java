@@ -73,6 +73,9 @@ public class Ball extends OneSpriteStaticActor {
                             if(getX()>-getWidth() && getX()<getStage().getViewport().getWorldWidth()+getWidth()) playSound();
                         }
                     }
+                }else if(otherHelper.actor instanceof Ball){
+                    if(!((Ball)otherHelper.actor).started)
+                        ((Ball)otherHelper.actor).started = true;
                 }
             }
 
