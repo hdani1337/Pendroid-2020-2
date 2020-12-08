@@ -32,8 +32,8 @@ public class IntroScreen extends MyScreen {
     @Override
     protected void afterAssetsLoaded() {
         ((BallGame)game).createWeather();
-        addStage(weatherBackground,0,false);
         addTimer(weatherAct);
+        addStage(weatherBackground,0,false);
         addStage(weatherForeGround,1,false);
         addStage(new IntroStage(game),2,false);
     }

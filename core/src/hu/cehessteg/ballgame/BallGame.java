@@ -39,7 +39,7 @@ public class BallGame extends MyGame {
 		try {
 			preferences = Gdx.app.getPreferences("frameworkSave");
 			muted = preferences.getBoolean("muted");
-			Gdx.app.getGraphics().setTitle("Remember Me");
+			Gdx.app.getGraphics().setTitle("Ball Simulator 2020");
 			Gdx.app.getGraphics().setResizable(false);
 			weatherCalculation.setTime(preferences.getFloat("time"));
 			//setDisplay();
@@ -60,7 +60,7 @@ public class BallGame extends MyGame {
 			@Override
 			public void onTick(PermanentTimer sender, float correction) {
 				super.onTick(sender, correction);
-				weatherCalculation.step(correction*800);
+				weatherCalculation.step(correction*1000);
 				weatherBackground.setTime(weatherCalculation.getTime());
 				weatherForeGround.setTime(weatherCalculation.getTime());
 				weatherBackground.act(correction);

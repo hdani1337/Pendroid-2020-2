@@ -91,7 +91,7 @@ public class MenuStage extends PrettySimpleStage {
 
     @Override
     public void setPositions() {
-        logo.setPosition(getViewport().getWorldWidth()/2-logo.getWidth()/2,getViewport().getWorldHeight()-logo.getHeight()*1.25f);
+        logo.setPosition(getViewport().getWorldWidth()/2-logo.getWidth()/2,getViewport().getWorldHeight()-logo.getHeight()*1.5f);
 
         start.setX(getViewport().getWorldWidth()/2 - start.getWidth()/2);
         start.setY(getViewport().getWorldHeight()*0.6f - start.getHeight()/2);

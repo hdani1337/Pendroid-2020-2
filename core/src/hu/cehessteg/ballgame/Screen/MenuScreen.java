@@ -2,7 +2,6 @@ package hu.cehessteg.ballgame.Screen;
 
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-import hu.cehessteg.ballgame.Stage.MenuBackgroundStage;
 import hu.cehessteg.ballgame.Stage.MenuStage;
 import hu.cehessteg.ballgame.Stage.WeatherBackground;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
@@ -22,7 +21,6 @@ public class MenuScreen extends MyScreen {
     public static AssetList assetList = new AssetList();
     static {
         assetList.collectAssetDescriptor(MenuStage.class,assetList);
-        assetList.collectAssetDescriptor(MenuBackgroundStage.class,assetList);
         assetList.collectAssetDescriptor(WeatherBackground.class, assetList);
     }
 

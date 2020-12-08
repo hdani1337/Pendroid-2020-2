@@ -19,11 +19,12 @@ public class Border extends OneSpriteStaticActor {
     public Border(MyGame game, World world, BorderType borderType, MyStage stage) {
         super(game, "pic/fekete.png");
         this.type = borderType;
+        setAlpha(0);
         setActorWorldHelper(new Box2DWorldHelper(world,this, ShapeType.Rectangle, new MyFixtureDef(), BodyDef.BodyType.StaticBody));
         switch (borderType){
             case ALSO:
                 setWidth(stage.getWidth()*2);
-                setHeight(1);
+                setHeight(0.75f);
                 setOrigin(0,0);
                 setPosition(0,0);
                 break;

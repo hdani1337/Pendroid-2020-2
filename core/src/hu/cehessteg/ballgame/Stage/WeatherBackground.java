@@ -27,6 +27,7 @@ public class WeatherBackground extends WeatherAbstract {
     private static final String CLOUD1_TEXTURE = "weather/cloud1.png";
     private static final String SUNDOWN_TEXTURE = "weather/sundown.png";
     private static final String SUNDAYLIGHT_TEXTURE = "weather/sundaylight.png";
+    private static final String PLAYFIELD_TEXTURE = "hatter.png";
 
     //region AssetList
     public static final String BLACK_TEXTURE = "pic/fekete.png";
@@ -41,6 +42,7 @@ public class WeatherBackground extends WeatherAbstract {
         assetList.addTexture(CLOUD1_TEXTURE);
         assetList.addTexture(SUNDOWN_TEXTURE);
         assetList.addTexture(SUNDAYLIGHT_TEXTURE);
+        assetList.addTexture(PLAYFIELD_TEXTURE);
     }
     //endregion
 
@@ -150,6 +152,7 @@ public class WeatherBackground extends WeatherAbstract {
 
     private SkyActor skyActor;
     private SunActor sunActor;
+    private OneSpriteStaticActor playfieldActor;
 
     public WeatherBackground(Viewport viewport, MyGame game) {
         super(viewport, game);
@@ -157,11 +160,15 @@ public class WeatherBackground extends WeatherAbstract {
         skyActor = new SkyActor(game,viewport.getWorldWidth(), viewport.getWorldHeight());
         sunActor = new SunActor(game,getWidth() / 2, (getWidth() / 16 * 9) / 2);
         sunActor.setX(getWidth() / 2 - sunActor.getWidth() / 2);
+        playfieldActor = new OneSpriteStaticActor(game,PLAYFIELD_TEXTURE);
+        playfieldActor.setSize(viewport.getWorldWidth(),(viewport.getWorldWidth()/playfieldActor.getWidth())*playfieldActor.getHeight());
 
         addActor(skyActor);
         addActor(sunActor);
+        addActor(playfieldActor);
         skyActor.setDebug(false);
         sunActor.setDebug(false);
+        playfieldActor.setZIndex(1000);
     }
 
     private Viewport viewport;
@@ -174,12 +181,12 @@ public class WeatherBackground extends WeatherAbstract {
         //skyActor.setY(-(skyActor.getHeight() - getHeight()) + light * skyActor.getHeight() * 0.8f);
         skyActor.setRain(rain);
 
-        sunActor.setY(getHeight() * 0.92f - sunActor.getHeight() / 2 + getHeight() * getSunPosition(time) / 3f);
+        sunActor.setY(getHeight() * 0.92f - sunActor.getHeight() / 2 + getHeight() * getSunPosition(time) / 1.75f);
         sunActor.setSundown(getSunPosition(time) > 0 ? 0 : (1f - light * light> 0f ? 1f - light * light : 0f));
         sunActor.setAlpha(1- rain * 2 < 0 ? 0 : 1- rain * 2);
 
         int cofc = 0;
-        float rainfactor = rain*50;
+        float rainfactor = random.nextFloat()*50;
 
         for (Actor a: getActors()) {
             if (a instanceof Cloud){
@@ -196,6 +203,7 @@ public class WeatherBackground extends WeatherAbstract {
             c.setPosition(random.nextInt((int)getWidth() * 2) - (int)getWidth(), getHeight() *0.85f - random.nextInt((int)(getHeight() / 2f)));
             c.setWidth(c.getWidth() / 2);
             c.setHeight(c.getHeight() / 2);
+            c.setZIndex(500);
             //c.setY(-(c.getHeight() - getHeight()));
 
         }

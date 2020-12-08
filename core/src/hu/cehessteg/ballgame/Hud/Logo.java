@@ -8,7 +8,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 
 public class Logo extends OneSpriteStaticActor {
     //region AssetList
-    public static final String LOGO_TEXTURE = "pic/logos/logo.png";
+    public static final String LOGO_TEXTURE = "cim.png";
     public static final String OPTIONS_TEXTURE = "pic/gombok/options.png";
     public static final String INFO_TEXTURE = "pic/gombok/info_i.png";
 
@@ -35,7 +35,7 @@ public class Logo extends OneSpriteStaticActor {
         switch (logotype){
             case MENU:{
                 sprite.setTexture(game.getMyAssetManager().getTexture(LOGO_TEXTURE));
-                setSize(game.getMyAssetManager().getTexture(LOGO_TEXTURE).getWidth()*0.35f,game.getMyAssetManager().getTexture(LOGO_TEXTURE).getHeight()*0.35f);
+                setSize(game.getMyAssetManager().getTexture(LOGO_TEXTURE).getWidth()*0.85f,game.getMyAssetManager().getTexture(LOGO_TEXTURE).getHeight()*0.85f);
                 break;
             }
             case OPTIONS:{
