@@ -23,12 +23,12 @@ public class HudStage extends PrettyStage {
     @Override
     public void assignment() {
         pause = new Pause(game);
-        scoreBoard = new TextBox(game,"0");
+        scoreBoard = new TextBox(game,"0",TextBox.RETRO_FONT,1);
     }
 
     @Override
     public void setSizes() {
-        pause.setSize(140,140);
+        pause.setSize(180,180);
     }
 
     @Override

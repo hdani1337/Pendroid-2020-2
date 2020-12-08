@@ -1,5 +1,6 @@
 package hu.cehessteg.ballgame.Actor;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Contact;
 import com.badlogic.gdx.physics.box2d.World;
@@ -54,7 +55,7 @@ public class Ball extends OneSpriteStaticActor {
                 if(!isGameOver && isAct) {
                     playSound();
                     if (started == false) started = true;
-                    ((Box2DWorldHelper) getActorWorldHelper()).getBody().applyForceToCenter((getWidth() * 0.4f - x) * 3000, (getHeight() * 0.75f - y) * 8000, true);
+                    ((Box2DWorldHelper) getActorWorldHelper()).getBody().applyForceToCenter((getWidth() * 0.4f - x) * 3000, (float) (Math.cos(getRotation())*((getHeight() * 0.75f - y) * 8000)), true);
                     setOrigintoCenter();
                     score++;
                     //((SimpleWorldHelper)getActorWorldHelper()).getBody().rotateTo(5,(getWidth()*0.4f-x*(getHeight()*0.45f-y)*5)*90);
@@ -125,13 +126,13 @@ public class Ball extends OneSpriteStaticActor {
     protected static String getHash(BallType ballType){
         switch (ballType) {
             case SOCCER: default:
-                return "fociLabda.png";
+                return "balls/fociLabda.png";
             case VOLLEY:
-                return "ropLabda.png";
+                return "balls/ropLabda.png";
             case BASKET:
-                return "kosarLabda.png";
+                return "balls/kosarLabda.png";
             case BASEBALL:
-                return "BaseballLabda.png";
+                return "balls/BaseballLabda.png";
         }
     }
 

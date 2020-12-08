@@ -33,7 +33,6 @@ import static hu.cehessteg.ballgame.SoundManager.kilepesHang;
 //TODO ESETLEG VALAMI ANIMÁCIÓ A HÁTTÉRBE (KÁRTYÁK UGRÁLNAK, STB)
 
 public class MenuStage extends PrettySimpleStage {
-    public static final String MENU_BG_TEXTURE = "pic/backgrounds/menuBg.jpg";
     public static final String STARTBUTTON_TEXTURE = "pic/gombok/jatek.png";
     public static final String OPTIONSBUTTON_TEXTURE = "pic/gombok/opciok.png";
     public static final String INFOBUTTON_TEXTURE = "pic/gombok/info.png";
@@ -83,9 +82,9 @@ public class MenuStage extends PrettySimpleStage {
     public void setSizes() {
         for (OneSpriteStaticActor a : menuElements)
            if(a != logo)
-               a.setSize(a.getWidth()*0.0025f,a.getHeight()*0.0025f);
+               a.setSize(a.getWidth()*0.004f,a.getHeight()*0.004f);
 
-        logo.setSize(logo.getWidth()*0.007f,logo.getHeight()*0.007f);
+        logo.setSize(logo.getWidth()*0.008f,logo.getHeight()*0.008f);
         logo.setOrigintoCenter();
     }
 
@@ -94,7 +93,7 @@ public class MenuStage extends PrettySimpleStage {
         logo.setPosition(getViewport().getWorldWidth()/2-logo.getWidth()/2,getViewport().getWorldHeight()-logo.getHeight()*1.5f);
 
         start.setX(getViewport().getWorldWidth()/2 - start.getWidth()/2);
-        start.setY(getViewport().getWorldHeight()*0.6f - start.getHeight()/2);
+        start.setY(getViewport().getWorldHeight()*0.65f - start.getHeight()/2);
 
         info.setY(start.getY() - info.getHeight()*1.4f);
         info.setX((getViewport().getWorldWidth()/2 - info.getWidth()/2));

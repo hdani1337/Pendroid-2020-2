@@ -15,7 +15,7 @@ public class TextBox extends MyGroup implements IPrettyStage {
     //region AssetList
     public static final String TEXTBOX_TEXTURE = "pic/ui/textBG.png";
     public static final String RETRO_FONT = "font/fontstyle.ttf";
-    public static final String VERDANA_FONT = "font/verdana.ttf";
+    public static final String VERDANA_FONT = "font/voyage.ttf";
 
     public static AssetList assetList = new AssetList();
     static {
@@ -28,22 +28,24 @@ public class TextBox extends MyGroup implements IPrettyStage {
     private OneSpriteStaticActor textBackground;//Szöveg háttere
     private MyLabel textLabel;//Szöveg label
     private float scale;//Méretezési skála
+    private String fontType;//Betűtípus
     //endregion
     //region Konstruktorok
     /**
      * SKÁLÁZÁS NÉLKÜLI KONSTRUKTOR
      * **/
     public TextBox(MyGame game, String text) {
-        this(game,text,1);
+        this(game,text, VERDANA_FONT, 1);
     }
 
     /**
      * FŐ KONSTRUKTOR
      * **/
-    public TextBox(MyGame game, String text, float scale){
+    public TextBox(MyGame game, String text, String fontType, float scale){
         super(game);
         this.text = text;
         this.scale = scale;
+        this.fontType = fontType;
         assignment();
         setSizes();
         setPositions();
@@ -56,7 +58,7 @@ public class TextBox extends MyGroup implements IPrettyStage {
     @Override
     public void assignment() {
         textBackground = new OneSpriteStaticActor(game, TEXTBOX_TEXTURE);
-        textLabel = new MyLabel(game, text, new Label.LabelStyle(game.getMyAssetManager().getFont(VERDANA_FONT), Color.WHITE)) {
+        textLabel = new MyLabel(game, text, new Label.LabelStyle(game.getMyAssetManager().getFont(fontType), Color.WHITE)) {
             @Override
             public void init() {
 
@@ -66,7 +68,7 @@ public class TextBox extends MyGroup implements IPrettyStage {
 
     @Override
     public void setSizes() {
-        textBackground.setSize((getMaxRowWidth()+1)*20, textLabel.getHeight()*1.35f);
+        textBackground.setSize((getMaxRowWidth()+1)*21, textLabel.getHeight()*1.4f);
         setScales();
     }
 

@@ -42,10 +42,10 @@ public class PauseStage extends PrettyStage {
     //region Absztrakt metódusok
     @Override
     public void assignment() {
-        info = new TextBox(game, "Megállítva",2f);
-        pontok = new TextBox(game, "Pontszámok\nHamarosan!");
-        again = new TextBox(game, "Folytatás",1.5f);
-        menu = new TextBox(game, "Menü",1.5f);
+        info = new TextBox(game, "Megállítva",TextBox.VERDANA_FONT,2f);
+        pontok = new TextBox(game, "Pontszámok\nHamarosan!",TextBox.RETRO_FONT,1.5f);
+        again = new TextBox(game, "Folytatás",TextBox.VERDANA_FONT,1.5f);
+        menu = new TextBox(game, "Menü",TextBox.VERDANA_FONT,1.5f);
 
         black = new OneSpriteStaticActor(game, BLACK_TEXTURE);
 

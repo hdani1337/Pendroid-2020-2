@@ -17,12 +17,11 @@ import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
 import static hu.cehessteg.ballgame.BallGame.muted;
 import static hu.cehessteg.ballgame.BallGame.preferences;
+import static hu.cehessteg.ballgame.Hud.TextBox.TEXTBOX_TEXTURE;
 import static hu.cehessteg.ballgame.Hud.TextBox.VERDANA_FONT;
 
 public class OptionSwitch extends MyGroup implements IPrettyStage {
-    public static String DECREMENT_TEXTURE = "pic/gombok/play_kek.png";
-    public static String TEXTBACKGROUND_TEXTURE = "pic/ui/szoveg.png";
-    public static String INCREMENT_TEXTURE = "pic/gombok/play.png";
+    public static String BUTTON_TEXTURE = "pic/gombok/play.png";
 
     private OneSpriteStaticActor decrement;
     private OneSpriteStaticActor background;
@@ -61,11 +60,11 @@ public class OptionSwitch extends MyGroup implements IPrettyStage {
                 break;
         }
 
-        decrement = new OneSpriteStaticActor(game,DECREMENT_TEXTURE);
-        increment = new OneSpriteStaticActor(game,INCREMENT_TEXTURE);
-        background = new OneSpriteStaticActor(game,TEXTBACKGROUND_TEXTURE);
+        decrement = new OneSpriteStaticActor(game,BUTTON_TEXTURE);
+        increment = new OneSpriteStaticActor(game,BUTTON_TEXTURE);
+        background = new OneSpriteStaticActor(game,TEXTBOX_TEXTURE);
 
-        text = new MyLabel(game, "", new Label.LabelStyle(game.getMyAssetManager().getFont(VERDANA_FONT), Color.BLACK)) {
+        text = new MyLabel(game, "", new Label.LabelStyle(game.getMyAssetManager().getFont(VERDANA_FONT), Color.WHITE)) {
             @Override
             public void init() {
                 setAlignment(0);
@@ -81,9 +80,9 @@ public class OptionSwitch extends MyGroup implements IPrettyStage {
     public void setSizes() {
         decrement.setSize(120,120);
         increment.setSize(120,120);
-        background.setSize((getMaxRowWidth()+1)*21,64);
-        text.setFontScale(1);
+        text.setFontScale(2);
         text.setAlignment(Align.center);
+        background.setSize((getMaxRowWidth()+1)*36,256);
     }
 
     @Override
@@ -149,20 +148,20 @@ public class OptionSwitch extends MyGroup implements IPrettyStage {
                 switch (indexCounter){
                     case 1: default:{
                         decrement.setVisible(false);
-                        text.setText("Labda fajtája: Focilabda");
+                        text.setText("Labda fajtája\nFocilabda");
                         break;
                     }
                     case 2:{
-                        text.setText("Labda fajtája: Röplabda");
+                        text.setText("Labda fajtája\nRöplabda");
                         break;
                     }
                     case 3:{
-                        text.setText("Labda fajtája: Kosárlabda");
+                        text.setText("Labda fajtája\nKosárlabda");
                         break;
                     }
                     case 4:{
                         increment.setVisible(false);
-                        text.setText("Labda fajtája: Baseball-labda");
+                        text.setText("Labda fajtája\nBaseball-labda");
                         break;
                     }
                 }
@@ -172,13 +171,13 @@ public class OptionSwitch extends MyGroup implements IPrettyStage {
                 switch (indexCounter){
                     case 1: default:{
                         increment.setVisible(false);
-                        text.setText("Némítás: Nincs némítva");
+                        text.setText("Némítás állapota\nNincs némítva");
                         muted = false;
                         break;
                     }
                     case 0:{
                         decrement.setVisible(false);
-                        text.setText("Némítás: Némítva");
+                        text.setText("Némítás állapota\nNémítva");
                         muted = true;
                         break;
                     }

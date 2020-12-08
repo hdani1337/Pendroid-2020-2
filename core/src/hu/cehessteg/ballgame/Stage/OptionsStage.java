@@ -20,12 +20,10 @@ import hu.csanyzeg.master.MyBaseClasses.Timers.Timer;
 import static hu.cehessteg.ballgame.BallGame.muted;
 import static hu.cehessteg.ballgame.BallGame.preferences;
 import static hu.cehessteg.ballgame.Stage.InfoStage.BACKBUTTON_TEXTURE;
-import static hu.cehessteg.ballgame.Stage.MenuStage.MENU_BG_TEXTURE;
 
 public class OptionsStage extends PrettyStage {
     public static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture(MENU_BG_TEXTURE);
         assetList.collectAssetDescriptor(TextBox.class,assetList);
         assetList.collectAssetDescriptor(Logo.class,assetList);
     }
@@ -58,7 +56,7 @@ public class OptionsStage extends PrettyStage {
 
     @Override
     public void setSizes() {
-        backButton.setSize(160,160);
+        backButton.setSize(180,180);
     }
 
     @Override
@@ -66,8 +64,8 @@ public class OptionsStage extends PrettyStage {
         backButton.setRotation(180);
         backButton.setPosition(getViewport().getWorldWidth() - backButton.getWidth()-16,16);
         optionsLogo.setPosition(getViewport().getWorldWidth()/2 - optionsLogo.getWidth()/2, getViewport().getWorldHeight() - optionsLogo.getHeight()*1.15f);
-        ballTypeButton.setPosition(getViewport().getWorldWidth()/2-ballTypeButton.getWidth()/2,getViewport().getWorldHeight()-570);
-        muteButton.setPosition(getViewport().getWorldWidth()/2-muteButton.getWidth()/2,getViewport().getWorldHeight()-420);
+        ballTypeButton.setPosition(getViewport().getWorldWidth()/2-ballTypeButton.getWidth()/2,getViewport().getWorldHeight()*0.52f);
+        muteButton.setPosition(getViewport().getWorldWidth()/2-muteButton.getWidth()/2,getViewport().getWorldHeight()*0.7f);
     }
 
     @Override

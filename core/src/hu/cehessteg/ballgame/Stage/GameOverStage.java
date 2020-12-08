@@ -41,10 +41,10 @@ public class GameOverStage extends PrettyStage {
     //region Absztrakt metódusok
     @Override
     public void assignment() {
-        info = new TextBox(game, "Vége a játéknak!",2f);
-        pontok = new TextBox(game, "Elért pontszámod\n-NULL-");
-        again = new TextBox(game, "Új játék",1.5f);
-        menu = new TextBox(game, "Menü",1.5f);
+        info = new TextBox(game, "Vége a játéknak!",TextBox.VERDANA_FONT,2f);
+        pontok = new TextBox(game, "Elért pontszámod\n-NULL-",TextBox.RETRO_FONT,1.5f);
+        again = new TextBox(game, "Új játék",TextBox.VERDANA_FONT,1.5f);
+        menu = new TextBox(game, "Menü",TextBox.VERDANA_FONT,1.5f);
 
         black = new OneSpriteStaticActor(game, BLACK_TEXTURE);
 

@@ -13,7 +13,6 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
 import static hu.cehessteg.ballgame.Hud.TextBox.RETRO_FONT;
-import static hu.cehessteg.ballgame.Stage.MenuStage.MENU_BG_TEXTURE;
 
 public class IntroStage extends PrettyStage {
     public static final String GDX_TEXTURE = "pic/logos/gdx.png";
@@ -23,7 +22,6 @@ public class IntroStage extends PrettyStage {
 
     public static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture(MENU_BG_TEXTURE);
         assetList.addTexture(GDX_TEXTURE);
         assetList.addTexture(CSANY_TEXTURE);
         assetList.addTexture(CSAPAT_TEXTURE);

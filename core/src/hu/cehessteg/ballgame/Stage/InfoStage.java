@@ -16,17 +16,17 @@ import hu.csanyzeg.master.MyBaseClasses.Timers.TickTimerListener;
 import hu.csanyzeg.master.MyBaseClasses.Timers.Timer;
 import hu.csanyzeg.master.MyBaseClasses.UI.MyLabel;
 
+import static hu.cehessteg.ballgame.Hud.TextBox.TEXTBOX_TEXTURE;
 import static hu.cehessteg.ballgame.Hud.TextBox.VERDANA_FONT;
-import static hu.cehessteg.ballgame.Stage.MenuStage.MENU_BG_TEXTURE;
+import static hu.cehessteg.ballgame.Stage.WeatherBackground.PLAYFIELD_TEXTURE;
 
 public class InfoStage extends PrettyStage {
-    public static String BACKBUTTON_TEXTURE = "pic/gombok/play_kek.png";
-    public static String TEXTBACKGROUND_TEXTURE = "pic/ui/szoveg.png";
+    public static String BACKBUTTON_TEXTURE = "pic/gombok/play.png";
 
     public static AssetList assetList = new AssetList();
     static {
-        assetList.addTexture(MENU_BG_TEXTURE);
         assetList.addTexture(BACKBUTTON_TEXTURE);
+        assetList.addFont(VERDANA_FONT, VERDANA_FONT, 32, Color.WHITE, AssetList.CHARS);
     }
 
     public InfoStage(MyGame game) {
@@ -36,6 +36,7 @@ public class InfoStage extends PrettyStage {
     private OneSpriteStaticActor textBg;
     private MyLabel text;
     private OneSpriteStaticActor back;
+    private OneSpriteStaticActor playfieldActor;
     private Logo infoLogo;
 
     private boolean setBack;
@@ -48,42 +49,46 @@ public class InfoStage extends PrettyStage {
         //    SoundManager.menuMusic.play();
         back = new OneSpriteStaticActor(game, BACKBUTTON_TEXTURE);
         back.setRotation(180);
-        textBg = new OneSpriteStaticActor(game,TEXTBACKGROUND_TEXTURE);
+        textBg = new OneSpriteStaticActor(game,TEXTBOX_TEXTURE);
         infoLogo = new Logo(game, Logo.LogoType.INFO);
 
-        String infoText = "Ez a játék a 2020-ban megrendezett Pendroid verseny 1. fordulójára készült.\n" +
-                "A játék célja az, hogy minél hamarabb megtaláld a kártyák párjait.\n" +
-                "Vigyázz, mert ha tévedsz vagy csalni próbálsz, pontokat fogsz veszteni!\n" +
-                "Ha kihívásra vágysz, az Arcade játékmód lesz a kedvenced, ugyanis ekkor\n" +
-                "mindössze két és fél perc áll rendelkezésedre a játékra, ha pedig csak\n" +
-                "kikapcsolódnál, a Zen módban korlátok nélkül keresgélhetsz.\n" +
-                "Továbbá még eldöntheted, hogy fix paklimérettel szeretnél játszani,\n" +
-                "vagy a nehézség és szint alapján folyamatosan növekedjen.\n" +
-                "Ezeket a paramétereket az Opciók menüpontban adhatod meg.\n" +
-                "\nJó játékot kíván a Céhessteg csapata!";
+        String infoText = "Ez az alkalmazás a Pendroid versenyre készült.\n" +
+                "Ennek az egyszerű játéknak a célja csupán annyi,\n" +
+                "hogy minél tovább pattogtasd a labdát.\n" +
+                "Minden egyes labdához érés után egy pontot\n" +
+                "kap a játékos. Ha a labda földet ér\n" +
+                "vagy kimegy a képből, akkor véget ér a játék.\n" +
+                "Továbbá az Opciók menüpontban kedvünkre\n" +
+                "választhatunk a rendelkezésre álló labdákból,\n" +
+                "ami mentésre is kerül, így a kilépés után is\n" +
+                "megmarad a kiválasztott állapot.\n\n" +
+                "Jó játékot kíván a Céhessteg csapata!";
 
-        text = new MyLabel(game, infoText, new Label.LabelStyle(game.getMyAssetManager().getFont(VERDANA_FONT), Color.BLACK)) {
+        text = new MyLabel(game, infoText, new Label.LabelStyle(game.getMyAssetManager().getFont(VERDANA_FONT), Color.WHITE)) {
             @Override
             public void init() {
 
             }
         };
+
+        playfieldActor = new OneSpriteStaticActor(game,PLAYFIELD_TEXTURE);
+        playfieldActor.setSize(getViewport().getWorldWidth(),(getViewport().getWorldWidth()/playfieldActor.getWidth())*playfieldActor.getHeight());
     }
 
     @Override
     public void setSizes() {
         infoLogo.setSize(infoLogo.getWidth()*0.9f,infoLogo.getHeight()*0.9f);
-        textBg.setSize(text.getWidth()+60,text.getHeight()+30);
-        back.setSize(160,160);
+        textBg.setSize(text.getWidth()+120,text.getHeight()+100);
+        back.setSize(180,180);
     }
 
     @Override
     public void setPositions() {
         back.setPosition(getViewport().getWorldWidth() - back.getWidth()-16,16);
-        infoLogo.setPosition(getViewport().getWorldWidth()/2 - infoLogo.getWidth()/2, getViewport().getWorldHeight() - infoLogo.getHeight()*1.1f);
+        infoLogo.setPosition(getViewport().getWorldWidth()/2 - infoLogo.getWidth()/2,getViewport().getWorldHeight() - infoLogo.getHeight()*1.1f);
         text.setAlignment(Align.center);
-        text.setPosition(getViewport().getWorldWidth()/2-text.getWidth()/2,getViewport().getWorldHeight()/2-text.getHeight()/2-20);
-        textBg.setPosition(text.getX()-30,text.getY()-15);
+        text.setPosition(getViewport().getWorldWidth()/2-text.getWidth()/2,playfieldActor.getHeight()*0.75f);
+        textBg.setPosition(text.getX()-60,text.getY()-50);
     }
 
     @Override
@@ -106,6 +111,7 @@ public class InfoStage extends PrettyStage {
     public void addActors() {
         addActor(textBg);
         addActor(text);
+        addActor(playfieldActor);
         addActor(infoLogo);
         addActor(back);
     }
@@ -159,7 +165,7 @@ public class InfoStage extends PrettyStage {
         infoLogo.setAlpha(alpha);
         back.setAlpha(alpha);
         textBg.setAlpha(alpha);
-        text.setColor(0,0,0,alpha);
+        text.setColor(text.getColor().r,text.getColor().g,text.getColor().b,alpha);
     }
     //endregion
 }

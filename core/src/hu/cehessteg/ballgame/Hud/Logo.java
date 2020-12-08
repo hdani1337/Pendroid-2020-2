@@ -2,6 +2,7 @@ package hu.cehessteg.ballgame.Hud;
 
 import com.badlogic.gdx.Gdx;
 
+import hu.cehessteg.ballgame.Actor.Ball;
 import hu.csanyzeg.master.MyBaseClasses.Assets.AssetList;
 import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
@@ -9,14 +10,12 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.OneSpriteStaticActor;
 public class Logo extends OneSpriteStaticActor {
     //region AssetList
     public static final String LOGO_TEXTURE = "cim.png";
-    public static final String OPTIONS_TEXTURE = "pic/gombok/options.png";
-    public static final String INFO_TEXTURE = "pic/gombok/info_i.png";
 
     public static AssetList assetList = new AssetList();
     static {
         assetList.addTexture(LOGO_TEXTURE);
-        assetList.addTexture(OPTIONS_TEXTURE);
-        assetList.addTexture(INFO_TEXTURE);
+        assetList.addTexture("balls/kosarLabda.png");
+        assetList.addTexture("balls/roplabda.png");
     }
     //endregion
     //region Logo típus Enum
@@ -39,14 +38,14 @@ public class Logo extends OneSpriteStaticActor {
                 break;
             }
             case OPTIONS:{
-                sprite.setTexture(game.getMyAssetManager().getTexture(OPTIONS_TEXTURE));
-                setSize(game.getMyAssetManager().getTexture(OPTIONS_TEXTURE).getWidth()*0.35f,game.getMyAssetManager().getTexture(OPTIONS_TEXTURE).getHeight()*0.35f);
+                sprite.setTexture(game.getMyAssetManager().getTexture("balls/kosarLabda.png"));
+                setSize(game.getMyAssetManager().getTexture("balls/kosarLabda.png").getWidth()*0.4f,game.getMyAssetManager().getTexture("balls/kosarLabda.png").getHeight()*0.4f);
                 speed = 24;
                 break;
             }
             case INFO:{
-                sprite.setTexture(game.getMyAssetManager().getTexture(INFO_TEXTURE));
-                setSize(game.getMyAssetManager().getTexture(INFO_TEXTURE).getWidth()*0.35f,game.getMyAssetManager().getTexture(INFO_TEXTURE).getHeight()*0.35f);
+                sprite.setTexture(game.getMyAssetManager().getTexture("balls/roplabda.png"));
+                setSize(game.getMyAssetManager().getTexture("balls/roplabda.png").getWidth()*0.4f,game.getMyAssetManager().getTexture("balls/roplabda.png").getHeight()*0.4f);
                 speed = 24;
                 break;
             }

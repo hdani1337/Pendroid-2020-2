@@ -27,7 +27,7 @@ public class WeatherBackground extends WeatherAbstract {
     private static final String CLOUD1_TEXTURE = "weather/cloud1.png";
     private static final String SUNDOWN_TEXTURE = "weather/sundown.png";
     private static final String SUNDAYLIGHT_TEXTURE = "weather/sundaylight.png";
-    private static final String PLAYFIELD_TEXTURE = "hatter.png";
+    public static final String PLAYFIELD_TEXTURE = "hatter.png";
 
     //region AssetList
     public static final String BLACK_TEXTURE = "pic/fekete.png";
@@ -159,7 +159,7 @@ public class WeatherBackground extends WeatherAbstract {
         this.viewport = viewport;
         skyActor = new SkyActor(game,viewport.getWorldWidth(), viewport.getWorldHeight());
         sunActor = new SunActor(game,getWidth() / 2, (getWidth() / 16 * 9) / 2);
-        sunActor.setX(getWidth() / 2 - sunActor.getWidth() / 2);
+        sunActor.setX(viewport.getWorldWidth()*0.01f);
         playfieldActor = new OneSpriteStaticActor(game,PLAYFIELD_TEXTURE);
         playfieldActor.setSize(viewport.getWorldWidth(),(viewport.getWorldWidth()/playfieldActor.getWidth())*playfieldActor.getHeight());
 
