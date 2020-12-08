@@ -110,10 +110,10 @@ public class InfoStage extends PrettyStage {
 
     @Override
     public void addActors() {
+        addActor(infoLogo);
         addActor(textBg);
         addActor(text);
         addActor(playfieldActor);
-        addActor(infoLogo);
         addActor(back);
     }
     //endregion
