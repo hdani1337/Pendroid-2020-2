@@ -9,10 +9,14 @@ import hu.csanyzeg.master.MyBaseClasses.Game.MyGame;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.PrettySimpleStage;
 import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 
+import static hu.cehessteg.ballgame.BallGame.preferences;
+
 public class BallStage extends Box2dStage {
     public static boolean isGameOver;
     public static boolean isAct;
     public static long score;
+
+    public static long highscore = preferences.getLong("highscore");
 
     public BallStage(MyGame game) {
         super(new ResponseViewport(9),game);

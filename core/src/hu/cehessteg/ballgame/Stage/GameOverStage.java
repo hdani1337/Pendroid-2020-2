@@ -14,6 +14,7 @@ import hu.csanyzeg.master.MyBaseClasses.Scene2D.ResponseViewport;
 import static hu.cehessteg.ballgame.BallGame.muted;
 import static hu.cehessteg.ballgame.BallGame.preferences;
 import static hu.cehessteg.ballgame.SoundManager.gameMusic;
+import static hu.cehessteg.ballgame.Stage.BallStage.highscore;
 
 public class GameOverStage extends PrettyStage {
     //region AssetList
@@ -28,6 +29,7 @@ public class GameOverStage extends PrettyStage {
     //region Változók
     private TextBox info;
     private TextBox pontok;
+    private TextBox rekord;
     private TextBox again;
     private TextBox menu;
 
@@ -43,6 +45,7 @@ public class GameOverStage extends PrettyStage {
     public void assignment() {
         info = new TextBox(game, "Vége a játéknak!",TextBox.VERDANA_FONT,2f);
         pontok = new TextBox(game, "Elért pontszámod\n-NULL-",TextBox.RETRO_FONT,1.5f);
+        rekord = new TextBox(game, "Rekordod\n"+highscore,TextBox.RETRO_FONT,1.5f);
         again = new TextBox(game, "Új játék",TextBox.VERDANA_FONT,1.5f);
         menu = new TextBox(game, "Menü",TextBox.VERDANA_FONT,1.5f);
 
@@ -62,8 +65,9 @@ public class GameOverStage extends PrettyStage {
     @Override
     public void setPositions() {
         info.setPosition(getViewport().getWorldWidth()/2-info.getWidth()/2,getViewport().getWorldHeight()*0.75f);
-        pontok.setPosition(getViewport().getWorldWidth()/2-pontok.getWidth()/2,getViewport().getWorldHeight()*0.52f);
-        again.setPosition(getViewport().getWorldWidth()/2-again.getWidth()/2,getViewport().getWorldHeight()*0.37f);
+        pontok.setPosition(getViewport().getWorldWidth()/2-pontok.getWidth()/2,getViewport().getWorldHeight()*0.6f);
+        rekord.setPosition(getViewport().getWorldWidth()/2-rekord.getWidth()/2,getViewport().getWorldHeight()*0.475f);
+        again.setPosition(getViewport().getWorldWidth()/2-again.getWidth()/2,getViewport().getWorldHeight()*0.35f);
         menu.setPosition(getViewport().getWorldWidth()/2-menu.getWidth()/2,getViewport().getWorldHeight()*0.25f);
     }
 
@@ -109,12 +113,14 @@ public class GameOverStage extends PrettyStage {
         pontok.setAlpha(0);
         again.setAlpha(0);
         menu.setAlpha(0);
+        rekord.setAlpha(0);
 
         addActor(black);
         addActor(info);
         addActor(pontok);
         addActor(again);
         addActor(menu);
+        addActor(rekord);
 
         addedActors = true;
     }
@@ -130,6 +136,7 @@ public class GameOverStage extends PrettyStage {
         pontok.remove();
         again.remove();
         menu.remove();
+        rekord.remove();
         addedActors = false;
     }
     //endregion
@@ -154,6 +161,13 @@ public class GameOverStage extends PrettyStage {
     private boolean addedActors;
     private void makeStage(){
         pontok.setText("Elért pontszámod\n"+BallStage.score);
+        if(BallStage.score > highscore){
+            rekord = new TextBox(game, "Megdöntötted a rekordod!",TextBox.VERDANA_FONT,1.5f);
+            highscore = BallStage.score;
+            preferences.putLong("highscore",highscore);
+            preferences.flush();
+        }
+
         setPositions();
 
         //Adjuk hozzá a gombokat a stagehez ha még nincsenek rajta
@@ -171,6 +185,7 @@ public class GameOverStage extends PrettyStage {
         pontok.setAlpha(alpha);
         again.setAlpha(alpha);
         menu.setAlpha(alpha);
+        rekord.setAlpha(alpha);
         //Áttűnés vége
     }
     //endregion
